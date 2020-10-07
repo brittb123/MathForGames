@@ -6,5 +6,23 @@ namespace MathForGames
 {
     class Actor
     {
+        public void Start()
+        {
+
+        }
+
+        public void Update()
+        {
+
+        }
+        public void Draw()
+        {
+
+        }
+
+        public void End()
+        {
+
+        }
     }
 }
