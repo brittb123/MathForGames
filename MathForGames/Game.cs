@@ -39,8 +39,10 @@ namespace MathForGames
             Actor actor = new Actor(0, 0, '■', ConsoleColor.DarkBlue);
             actor.Velocity.X = 1;
             Player player = new Player(0, 1, '@', ConsoleColor.Red);
+            Ball ball = new Ball(10, 1, '■');
             _scene.AddActor(actor);
             _scene.AddActor(player);
+            _scene.AddActor(ball);
         }
 
 
