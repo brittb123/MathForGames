@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Threading;
+using Math_Library;
 
 namespace MathForGames
 {
@@ -11,6 +12,7 @@ namespace MathForGames
         private Scene _scene;
        
         private static bool _gameOver = false;
+        public static ConsoleColor DefaultColor { get; set; } = ConsoleColor.White;
 
         //Static function used to set game over without an instance of game.
         public static void SetGameOver(bool value)
@@ -18,25 +20,27 @@ namespace MathForGames
             _gameOver = value;
         }
 
-        //Returns if the specific console key is pressed
-        public static bool CheckKey(ConsoleKey key)
+        
+
+        public static ConsoleKey GetNextKey()
         {
-            if (Console.KeyAvailable)
+            if (!Console.KeyAvailable)
             {
-                if (Console.ReadKey(true).Key == key)
-                {
-                    return true;
-                }  
+                return 0;
             }
-            return false;
+            return Console.ReadKey(true).Key;
         }
 
         //Called when the game begins. Use this for initialization.
         public void Start()
         {
+            Console.CursorVisible = false;
             _scene = new Scene();
-            Actor actor = new Actor();
+            Actor actor = new Actor(0, 0, '■', ConsoleColor.DarkBlue);
+            actor.Velocity.X = 1;
+            Player player = new Player(0, 1, '@', ConsoleColor.Red);
             _scene.AddActor(actor);
+            _scene.AddActor(player);
         }
 
 
@@ -73,7 +77,7 @@ namespace MathForGames
                 Draw();
                 while (Console.KeyAvailable) 
                     Console.ReadKey(true);
-                Thread.Sleep(250);
+                Thread.Sleep(150);
             }
 
             End();
