@@ -19,6 +19,7 @@ namespace MathForGames
 
                 case ConsoleKey.A:
                     _velocity.X = -1;
+                    
                     break;
                 case ConsoleKey.D:
                     _velocity.X = 1;

@@ -59,8 +59,8 @@ namespace MathForGames
 
         public virtual void Update()
         {
-            
-            _position.X += _velocity.X;
+            float magnitude = _velocity.GetMagnitude();
+            _position += _velocity * 10000;
             _position.Y += _velocity.Y;
             _position.X = Math.Clamp(_position.X, 0, Console.WindowWidth-1);
             _position.Y = Math.Clamp(_position.Y, 0, Console.WindowHeight-1);
@@ -72,6 +72,7 @@ namespace MathForGames
             Console.SetCursorPosition((int)_position.X, (int)_position.Y);
             Console.Write(_icon);
             Console.ForegroundColor = Game.DefaultColor;
+            
         }
 
         public virtual void End()

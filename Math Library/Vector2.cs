@@ -43,5 +43,24 @@ namespace Math_Library
             _x = x;
             _y = y;
         }
+
+        //Overloads operator for adding to vectors together.
+        public static Vector2 operator +(Vector2 lhs, Vector2 rhs)
+        {
+            float x = lhs.X + rhs.X;
+            float y = lhs.Y + rhs.Y;
+
+            return new Vector2(x, y);
+
+
+        }
+        public static Vector2 operator *(Vector2 lhs, float scaler)
+        {
+            return new Vector2(lhs.X * scaler, lhs.Y * scaler);
+        }
+        public float GetMagnitude()
+        {
+            return (float)Math.Sqrt(X * X + Y * Y);
+        }
     }
 }

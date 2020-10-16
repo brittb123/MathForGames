@@ -116,7 +116,7 @@ namespace MathForGames
             }
         }
 
-        public virtual  void End()
+        public virtual void End()
         {
             for (int i = 0; i < _actors.Length; i++)
             {

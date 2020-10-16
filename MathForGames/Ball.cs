@@ -10,16 +10,18 @@ namespace MathForGames
         {
 
         }
-        public bool Collide(Player player)
+        public bool Collide(Actor actor)
         {
             
-            if (player.Position.X == Position.X)
+            if (actor.Position.X == Position.X)
             {
                 _position.X--;
                 return true;
             }
             return false;
         }
+
+        
         public override void Update()
         {
             
