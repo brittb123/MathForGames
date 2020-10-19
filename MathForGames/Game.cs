@@ -79,10 +79,9 @@ namespace MathForGames
             
         }
 
-        public static int GetNextKey()
+      public static bool GetKeyDown(int key)
         {
-
-            return Raylib.GetKeyPressed();
+            return Raylib.IsKeyDown((KeyboardKey)key);
         }
 
         public static bool GetKeyPressed(int key)
