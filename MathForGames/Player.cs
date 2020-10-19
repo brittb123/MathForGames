@@ -29,10 +29,10 @@ namespace MathForGames
                     _velocity.X = 1;
                     break;
                 case ConsoleKey.S:
-                    _velocity.Y = 1;
+                    _velocity.Y = -1;
                     break;
                 case ConsoleKey.W:
-                    _velocity.Y = -1;
+                    _velocity.Y = 1;
                     break;
                 default:
                     _velocity.X = 0;

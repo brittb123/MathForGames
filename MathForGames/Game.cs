@@ -61,9 +61,7 @@ namespace MathForGames
                 }
             
             } 
-
             return removed;
-
         }
 
         public static Scene GetScenes(int index)
@@ -75,26 +73,29 @@ namespace MathForGames
         {
             if(index >= _scenes.Length || index < 0) 
                 return;
-            _scenes[_currentScene].End();
+            if (_scenes[_currentScene].Started)
+                _scenes[_currentScene].End();
             _currentScene = index;
-            _scenes[_currentScene].Start();
+            
         }
 
-        public static ConsoleKey GetNextKey()
+        public static int GetNextKey()
         {
-            if (!Console.KeyAvailable)
-            {
-                return 0;
-            }
-            return Console.ReadKey(true).Key;
+
+            return Raylib.GetKeyPressed();
+        }
+
+        public static bool GetKeyPressed(int key)
+        {
+            return Raylib.IsKeyPressed((KeyboardKey)key);
         }
 
         public Game()
         {
             _scenes = new Scene[0];
         }
-        //Called when the game begins. Use this for initialization.
 
+        //Called when the game begins. Use this for initialization.
         public void Start()
         {
             Raylib.SetTargetFPS(0);
@@ -121,6 +122,7 @@ namespace MathForGames
             startingSceneIndex = AddScenes(scene);
             
             AddScenes(scene2);
+            scene2.AddActor(player);
 
             SetCurrentScene(startingSceneIndex);
         }
@@ -129,8 +131,11 @@ namespace MathForGames
         //Called every frame.
         public void Update()
         {
+            if (!_scenes[_currentScene].Started) 
+                _scenes[_currentScene].Start();
+
             _scenes[_currentScene].Update();
-            
+
         }
 
         //Used to display objects and other info on the screen.
@@ -148,7 +153,8 @@ namespace MathForGames
         //Called when the game ends.
         public void End()
         {
-
+            if (_scenes[_currentScene].Started)
+                _scenes[_currentScene].End();
         }
 
 

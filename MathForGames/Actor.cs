@@ -14,6 +14,7 @@ namespace MathForGames
         protected Vector2 _velocity;
         protected ConsoleColor _color;
         protected Color _rayColor;
+        public bool Started { get; private set; }
         public Vector2 Position
         {
             get
@@ -52,19 +53,15 @@ namespace MathForGames
             _velocity = new Vector2();
         }
 
-        public Actor(float x, float y, Color _raycolor, char icon = ' ', ConsoleColor color = ConsoleColor.Red) : this(x,y,icon,color)
+        public Actor(float x, float y, Color _raycolor, char icon = ' ', ConsoleColor color = ConsoleColor.Red) : this(x, y, icon, color)
         {
             _rayColor = Color.WHITE;
-            
+
         }
-    
-
-
-
 
         public virtual void Start()
         {
-
+            Started = true;
         }
 
         public virtual void Update()
@@ -76,6 +73,7 @@ namespace MathForGames
             _position.Y = Math.Clamp(_position.Y, 0, Console.WindowHeight-1);
 
         }
+
         public virtual void Draw()
         {
             Raylib.DrawText(_icon.ToString(), (int)_position.X * 32, (int)_position.Y * 32, 20, Color.RED);
@@ -88,7 +86,7 @@ namespace MathForGames
 
         public virtual void End()
         {
-
+            Started = false;
         }
     }
 }
