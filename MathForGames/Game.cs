@@ -81,6 +81,8 @@ namespace MathForGames
 
       public static bool GetKeyDown(int key)
         {
+            bool testbool = true;
+            int test = Convert.ToInt32(testbool);
             return Raylib.IsKeyDown((KeyboardKey)key);
         }
 
