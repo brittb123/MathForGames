@@ -4,13 +4,15 @@ using System.IO;
 using System.Text;
 using System.Threading;
 using Math_Library;
+using Raylib_cs;
 
 namespace MathForGames
 {
     class Game
     {
-        private Scene _scene;
-       
+        private static int _currentScene;
+        
+        private static Scene[] _scenes;
         private static bool _gameOver = false;
         public static ConsoleColor DefaultColor { get; set; } = ConsoleColor.White;
 
@@ -19,8 +21,51 @@ namespace MathForGames
         {
             _gameOver = value;
         }
+        public static void AddScenes(Scene scene)
+        {
+            Scene[] temparray = new Scene[_scenes.Length + 1];
+            for(int i = 0; i < _scenes.Length; i++)
+            {
+                temparray[i] = _scenes[i];
+            }
+            temparray[_scenes.Length] = scene;
+            _scenes = temparray;
+        }
 
-        
+        public static bool RemoveScene(Scene scene)
+        {
+            if (scene == null)
+            {
+                return false;
+            }
+
+            bool removed = false;
+
+            Scene[] temparray = new Scene[_scenes.Length + 1];
+            int j = 0;
+            for (int i = 0; i < _scenes.Length; i++)
+            {
+
+                if(temparray[j] != scene)
+                {
+                    temparray[j] = _scenes[i];
+                    j++;
+                }
+                else
+                {
+                    removed = true;
+                        return removed;
+                }
+            
+            } 
+
+            return removed;
+
+        }
+        public static Scene GetScenes(int index)
+        {
+            return _scenes[index];
+        }
 
         public static ConsoleKey GetNextKey()
         {
@@ -31,33 +76,46 @@ namespace MathForGames
             return Console.ReadKey(true).Key;
         }
 
+        public Game()
+        {
+            _scenes = new Scene[0];
+        }
         //Called when the game begins. Use this for initialization.
         public void Start()
         {
+            Raylib.SetTargetFPS(0);
+            Raylib.InitWindow(1024, 760, "Math For Games");
             Console.CursorVisible = false;
-            _scene = new Scene();
-            Actor actor = new Actor(0, 0, '■', ConsoleColor.DarkBlue);
+            Scene scene = new Scene();
+            scene = new Scene();
+            Actor actor = new Actor(0, 0, Color.WHITE, '♦', ConsoleColor.DarkBlue);
             actor.Velocity.X = 1;
             Player player = new Player(0, 1, '@', ConsoleColor.Red);
             Ball ball = new Ball(10, 1, '■');
-            _scene.AddActor(actor);
-            _scene.AddActor(player);
-            _scene.AddActor(ball);
+            scene.AddActor(actor);
+            scene.AddActor(player);
+            scene.AddActor(ball);
+            AddScenes(scene);
+            
         }
 
 
         //Called every frame.
         public void Update()
         {
-            _scene.Update();
+            _scenes[_currentScene].Update();
             
         }
 
         //Used to display objects and other info on the screen.
         public void Draw()
         {
-            Console.Clear();
-            _scene.Draw();
+            Raylib.BeginDrawing();
+            
+            Raylib.ClearBackground(Color.WHITE);
+            _scenes[_currentScene].Draw();
+            
+            Raylib.EndDrawing();
         }
 
 
@@ -73,7 +131,7 @@ namespace MathForGames
         {
             Start();
 
-            while(!_gameOver)
+            while (!_gameOver && !Raylib.WindowShouldClose()) 
             {
                 Update();
                 Draw();
