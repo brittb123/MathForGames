@@ -21,7 +21,8 @@ namespace MathForGames
         {
             _gameOver = value;
         }
-        public static void AddScenes(Scene scene)
+
+        public static int AddScenes(Scene scene)
         {
             Scene[] temparray = new Scene[_scenes.Length + 1];
             for(int i = 0; i < _scenes.Length; i++)
@@ -30,6 +31,8 @@ namespace MathForGames
             }
             temparray[_scenes.Length] = scene;
             _scenes = temparray;
+            int index = _scenes.Length;
+            return index;
         }
 
         public static bool RemoveScene(Scene scene)
@@ -62,9 +65,19 @@ namespace MathForGames
             return removed;
 
         }
+
         public static Scene GetScenes(int index)
         {
             return _scenes[index];
+        }
+
+        public static void SetCurrentScene(int index)
+        {
+            if(index >= _scenes.Length || index < 0) 
+                return;
+            _scenes[_currentScene].End();
+            _currentScene = index;
+            _scenes[_currentScene].Start();
         }
 
         public static ConsoleKey GetNextKey()
@@ -81,22 +94,35 @@ namespace MathForGames
             _scenes = new Scene[0];
         }
         //Called when the game begins. Use this for initialization.
+
         public void Start()
         {
             Raylib.SetTargetFPS(0);
             Raylib.InitWindow(1024, 760, "Math For Games");
+            
             Console.CursorVisible = false;
+            
             Scene scene = new Scene();
+            Scene scene2 = new Scene();
             scene = new Scene();
+            
             Actor actor = new Actor(0, 0, Color.WHITE, '♦', ConsoleColor.DarkBlue);
             actor.Velocity.X = 1;
+            
             Player player = new Player(0, 1, '@', ConsoleColor.Red);
             Ball ball = new Ball(10, 1, '■');
+            
             scene.AddActor(actor);
             scene.AddActor(player);
             scene.AddActor(ball);
-            AddScenes(scene);
+
+            int startingSceneIndex = 0;
+
+            startingSceneIndex = AddScenes(scene);
             
+            AddScenes(scene2);
+
+            SetCurrentScene(startingSceneIndex);
         }
 
 
