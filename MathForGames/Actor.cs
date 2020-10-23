@@ -67,6 +67,16 @@ namespace MathForGames
 
         }
 
+       
+
+        private void UpdateFacing()
+        {
+            if (_velocity.Magnitude <= 0)
+                return;
+
+            _facing = Velocity.Normalized;
+        }
+
         public virtual void Start()
         {
             Started = true;
@@ -75,8 +85,8 @@ namespace MathForGames
         public virtual void Update(float deltaTime)
         {
             float magnitude = _velocity.GetMagnitude();
-            _position += _velocity;
-            _position.Y += _velocity.Y;
+            _position += _velocity * deltaTime;
+            
             _position.X = Math.Clamp(_position.X, 0, Console.WindowWidth-1);
             _position.Y = Math.Clamp(_position.Y, 0, Console.WindowHeight-1);
 
@@ -92,6 +102,17 @@ namespace MathForGames
                 (int)((Position.Y + Forward.Y) * 32),
                 Color.WHITE
                 );
+            if(Position.X >= 0 && Position.X < Console.WindowWidth - 1
+                && Position.Y >= 0 && Position.Y >Console.WindowHeight - 1)
+            {
+                Position.X = 1;
+                Position.Y = 0;
+                Console.SetCursorPosition((int)_position.X, (int)_position.Y);
+                Console.Write(_icon);
+            }
+            Console.ForegroundColor = _color;
+         
+            Console.ForegroundColor = Game.DefaultColor;
         }
 
         public virtual void End()

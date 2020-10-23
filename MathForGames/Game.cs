@@ -111,7 +111,7 @@ namespace MathForGames
             Actor actor = new Actor(0, 0, Color.WHITE, '♦', ConsoleColor.DarkBlue);
             actor.Velocity.X = 1;
             
-            Player player = new Player(0, 1, '@', ConsoleColor.Red);
+            Player player = new Player(0, 1, 'A', ConsoleColor.Red);
            
             
             scene.AddActor(actor);

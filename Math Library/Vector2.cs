@@ -51,12 +51,24 @@ namespace Math_Library
             _y = y;
         }
 
+        public Vector2 Normalized
+        {
+            get
+            {
+                return Normalize(this);
+            }
+
+        }
+        
+
         //Overloads operator for adding to vectors together.
 
         public static float DotProduct(Vector2 lhs, Vector2 rhs)
         {
             return (lhs.X * rhs.X) + (lhs.Y * rhs.Y);
         }
+
+        
         //Overloads the operator + to add both x's and y's
         public static Vector2 operator +(Vector2 lhs, Vector2 rhs)
         {
