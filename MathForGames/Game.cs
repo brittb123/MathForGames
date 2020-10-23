@@ -112,11 +112,11 @@ namespace MathForGames
             actor.Velocity.X = 1;
             
             Player player = new Player(0, 1, '@', ConsoleColor.Red);
-            Ball ball = new Ball(10, 1, '■');
+           
             
             scene.AddActor(actor);
             scene.AddActor(player);
-            scene.AddActor(ball);
+            
 
             int startingSceneIndex = 0;
 
@@ -130,12 +130,12 @@ namespace MathForGames
 
 
         //Called every frame.
-        public void Update()
+        public void Update(float deltaTime)
         {
             if (!_scenes[_currentScene].Started) 
                 _scenes[_currentScene].Start();
 
-            _scenes[_currentScene].Update();
+            _scenes[_currentScene].Update(deltaTime);
 
         }
 
@@ -166,7 +166,8 @@ namespace MathForGames
 
             while (!_gameOver && !Raylib.WindowShouldClose()) 
             {
-                Update();
+                float deltaTime = Raylib.GetFrameTime();
+                Update(deltaTime);
                 Draw();
                 while (Console.KeyAvailable) 
                     Console.ReadKey(true);

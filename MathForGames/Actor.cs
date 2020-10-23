@@ -14,7 +14,13 @@ namespace MathForGames
         protected Vector2 _velocity;
         protected ConsoleColor _color;
         protected Color _rayColor;
+        private Vector2 _facing;
         public bool Started { get; private set; }
+        public Vector2 Forward
+        {
+            get { return _facing; }
+            set { _facing = value; }
+        }
         public Vector2 Position
         {
             get
@@ -51,6 +57,8 @@ namespace MathForGames
             _position = new Vector2(x, y);
             _color = color;
             _velocity = new Vector2();
+
+            Forward = new Vector2(1, 0);
         }
 
         public Actor(float x, float y, Color _raycolor, char icon = ' ', ConsoleColor color = ConsoleColor.Red) : this(x, y, icon, color)
@@ -64,7 +72,7 @@ namespace MathForGames
             Started = true;
         }
 
-        public virtual void Update()
+        public virtual void Update(float deltaTime)
         {
             float magnitude = _velocity.GetMagnitude();
             _position += _velocity;
@@ -76,12 +84,14 @@ namespace MathForGames
 
         public virtual void Draw()
         {
-            Raylib.DrawText(_icon.ToString(), (int)_position.X * 32, (int)_position.Y * 32, 20, Color.RED);
-            Console.ForegroundColor = _color;
-            Console.SetCursorPosition((int)_position.X, (int)_position.Y);
-            Console.Write(_icon);
-            Console.ForegroundColor = Game.DefaultColor;
-            
+            Raylib.DrawText(_icon.ToString(), (int)(_position.X * 32), (int)(_position.Y * 32), 32, _rayColor);
+            Raylib.DrawLine(
+                (int)(Position.X * 32),
+                (int)(Position.Y * 32),
+                (int)((Position.X + Forward.X) * 32),
+                (int)((Position.Y + Forward.Y) * 32),
+                Color.WHITE
+                );
         }
 
         public virtual void End()

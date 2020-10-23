@@ -15,8 +15,9 @@ namespace MathForGames
         {
 
         }
-        public override void Update()
+        public override void Update(float deltaTime)
         {
+
 
             int xVelocity = -Convert.ToInt32(Game.GetKeyDown((int)KeyboardKey.KEY_A)) +
                 Convert.ToInt32(Game.GetKeyDown((int)KeyboardKey.KEY_D));
@@ -29,6 +30,7 @@ namespace MathForGames
             Velocity.Y /= Velocity.GetMagnitude();
 
 
+
             //ConsoleKey keypressed = Game.GetNextKey();
 
             //switch (keypressed)
@@ -36,6 +38,9 @@ namespace MathForGames
 
             //    case ConsoleKey.A:
             //        _velocity.X = -1;
+
+
+                    
 
             //        break;
             //    case ConsoleKey.D:
@@ -52,7 +57,11 @@ namespace MathForGames
             //        _velocity.Y = 0;
             //        break;
             //}
-            base.Update();
+
+            
+
+            base.Update(deltaTime);
+
         }
     }
 }

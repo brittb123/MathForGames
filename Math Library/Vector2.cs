@@ -32,6 +32,13 @@ namespace Math_Library
                 _y = value;
             }
         }
+        public float Magnitude
+        {
+            get
+            {
+                return (float)Math.Sqrt(X * X + Y * Y); 
+            }
+        }
 
       public Vector2()
         {
@@ -45,6 +52,12 @@ namespace Math_Library
         }
 
         //Overloads operator for adding to vectors together.
+
+        public static float DotProduct(Vector2 lhs, Vector2 rhs)
+        {
+            return (lhs.X * rhs.X) + (lhs.Y * rhs.Y);
+        }
+        //Overloads the operator + to add both x's and y's
         public static Vector2 operator +(Vector2 lhs, Vector2 rhs)
         {
             float x = lhs.X + rhs.X;
@@ -54,10 +67,29 @@ namespace Math_Library
 
 
         }
+        public static Vector2 Normalize(Vector2 vector2)
+        {
+            if (vector2.Magnitude == 0)
+                return new Vector2();
+
+            return vector2 / vector2.Magnitude;
+        }
+
+        public static Vector2 operator -(Vector2 lhs, Vector2 rhs)
+        {
+            return new Vector2(lhs.X - rhs.X, lhs.Y - rhs.Y);
+        }
+
         public static Vector2 operator *(Vector2 lhs, float scaler)
         {
             return new Vector2(lhs.X * scaler, lhs.Y * scaler);
         }
+
+        public static Vector2 operator /(Vector2 lhs, float scalar)
+        {
+            return new Vector2(lhs.X / scalar, lhs.Y / scalar);
+        }
+
         public float GetMagnitude()
         {
             return (float)Math.Sqrt(X * X + Y * Y);
