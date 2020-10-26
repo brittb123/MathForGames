@@ -19,11 +19,11 @@ namespace MathForGames
                 _speed = value;
             }
         }
-        public Player(float x, float y, char icon = ' ', ConsoleColor color = ConsoleColor.White) : base(x, y, icon, color)
+        public Player(float x, float y, char icon = ' ', ConsoleColor color = ConsoleColor.Red) : base(x, y, icon, color)
         {
 
         }
-        public Player(float x, float y, Color raycolor, char icon = ' ', ConsoleColor color = ConsoleColor.White) : base(x, y, raycolor, icon, color)
+        public Player(float x, float y, Color raycolor, char icon = ' ', ConsoleColor color = ConsoleColor.Red) : base(x, y, raycolor, icon, color)
         {
 
         }

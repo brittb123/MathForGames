@@ -52,7 +52,7 @@ namespace MathForGames
         }
         public Actor(float x, float y, char icon = ' ', ConsoleColor color = ConsoleColor.Red)
         {
-            _rayColor = Color.WHITE;
+            _rayColor = Color.RED;
             _icon = icon;
             _position = new Vector2(x, y);
             _color = color;
@@ -63,7 +63,7 @@ namespace MathForGames
 
         public Actor(float x, float y, Color _raycolor, char icon = ' ', ConsoleColor color = ConsoleColor.Red) : this(x, y, icon, color)
         {
-            _rayColor = Color.WHITE;
+            _rayColor = Color.BLUE;
 
         }
 

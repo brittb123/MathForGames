@@ -8,6 +8,7 @@ namespace MathForGames
 {
     class Enemy : Actor
     {
+        private Player Player { get; set; }
         private Actor _target;
         private Color _alertColor;
         public Actor Target
@@ -28,10 +29,11 @@ namespace MathForGames
             _alertColor = Color.RED;
         }
 
-        public bool CheckTargetInSight(float maxAngle, float maxDistance)
+        public bool CheckTargetInSight(float maxAngle, float maxDistance, Player player)
         {
             if (Target == null)
-                return false;
+                Target = player;
+                
 
             Vector2 direction = Target.Position - Position;
             float distance = direction.Magnitude;
@@ -45,7 +47,7 @@ namespace MathForGames
 
         public override void Update(float deltaTime)
         {
-            if (CheckTargetInSight(1.5f, 5))
+            if (CheckTargetInSight(1.5f, 5, Player))
             {
                 _rayColor = Color.RED;
             }

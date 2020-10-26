@@ -127,7 +127,7 @@ namespace MathForGames
 
             SetCurrentScene(startingSceneIndex);
             AddScenes(scene2);
-            scene2.AddActor(player);
+            
         }
 
 
