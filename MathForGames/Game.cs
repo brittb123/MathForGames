@@ -99,8 +99,8 @@ namespace MathForGames
         //Called when the game begins. Use this for initialization.
         public void Start()
         {
-            Raylib.SetTargetFPS(0);
-            Raylib.InitWindow(1024, 760, "Math For Games");
+            Raylib.SetTargetFPS(60);
+            Raylib.InitWindow(820, 720, "Math For Games");
             
             Console.CursorVisible = false;
             
@@ -108,10 +108,10 @@ namespace MathForGames
             Scene scene2 = new Scene();
             scene = new Scene();
             
-            Actor actor = new Actor(0, 0, Color.WHITE, '♦', ConsoleColor.DarkBlue);
+            Actor actor = new Actor(0, 0, Color.YELLOW, '*', ConsoleColor.DarkBlue);
             actor.Velocity.X = 1;
             
-            Player player = new Player(0, 1, 'A', ConsoleColor.Red);
+            Player player = new Player(0, 1, Color.RED, 'A', ConsoleColor.Yellow);
            
             
             scene.AddActor(actor);
@@ -122,10 +122,12 @@ namespace MathForGames
 
             startingSceneIndex = AddScenes(scene);
             
-            AddScenes(scene2);
-            scene2.AddActor(player);
+            
+            
 
             SetCurrentScene(startingSceneIndex);
+            AddScenes(scene2);
+            scene2.AddActor(player);
         }
 
 
@@ -171,7 +173,7 @@ namespace MathForGames
                 Draw();
                 while (Console.KeyAvailable) 
                     Console.ReadKey(true);
-                Thread.Sleep(150);
+                
             }
 
             End();

@@ -100,7 +100,7 @@ namespace MathForGames
                 (int)(Position.Y * 32),
                 (int)((Position.X + Forward.X) * 32),
                 (int)((Position.Y + Forward.Y) * 32),
-                Color.WHITE
+                Color.RED
                 );
             if(Position.X >= 0 && Position.X < Console.WindowWidth - 1
                 && Position.Y >= 0 && Position.Y >Console.WindowHeight - 1)
