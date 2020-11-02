@@ -7,7 +7,7 @@ using Raylib_cs;
 
 namespace MathForGames
 {
-    class Actor
+    public class Actor
     {
         protected char _icon = ' ';
         protected Vector2 _position;
@@ -24,7 +24,7 @@ namespace MathForGames
         public Vector2 Forward
         {
             get { return new Vector2(_transform.m11, _transform.m21); }
-            set { _transform.m11 = value.X; _transform.m21 = value.Y; }
+            
         }
         public Vector2 Position
         {
@@ -64,7 +64,7 @@ namespace MathForGames
             _color = color;
             _velocity = new Vector2();
 
-            Forward = new Vector2(1, 0);
+            //Forward = new Vector2(1, 0);
         }
 
         public Actor(float x, float y, Color _raycolor, char icon = ' ', ConsoleColor color = ConsoleColor.Red) : this(x, y, icon, color)
@@ -75,42 +75,41 @@ namespace MathForGames
 
         public void SetTranslate(Vector2 position)
         {
-            _translation.m31 += Position.X;
-            _translation.m32 += Position.Y;
+            _translation.m31 += position.X;
+            _translation.m32 += position.Y;
         }
 
         public void SetRotation(float radians)
         {
             _rotate.m11 = (float)Math.Cos(radians);
             _rotate.m12 = (float)Math.Sin(radians);
-            _rotate.m21 = -(float)Math.Sin(radians);
+            _rotate.m21 = (float)-(Math.Sin(radians));
             _rotate.m22 = (float)Math.Cos(radians);
         }
 
         public void SetScale(float X, float Y)
         {
-            _scale.m11 *= X;
-            _scale.m21 *= X;
-            _scale.m12 *= Y;
-            _scale.m22 *= Y;
+            _scale.m11 += X;
+         
+            _scale.m22 += Y;
             
         }
 
         public void UpdateTransform()
         {
-            _transform = _scale * _rotate;
 
-            _transform *= _translation;
+            _transform *= _translation * _rotate;
+            _transform *=_scale;
         }
-       
 
-        private void UpdateFacing()
-        {
-            if (_velocity.Magnitude <= 0)
-                return;
 
-            _facing = Velocity.Normalized;
-        }
+        //private void UpdateFacing()
+        //{
+        //    if (_velocity.Magnitude <= 0)
+        //        return;
+
+        //    _facing = Velocity.Normalized;
+        //}
 
         public virtual void Start()
         {
@@ -124,13 +123,17 @@ namespace MathForGames
             
             _position.X = Math.Clamp(_position.X, 0, Console.WindowWidth-1);
             _position.Y = Math.Clamp(_position.Y, 0, Console.WindowHeight-1);
-            
+         
+
+
         }
 
         public virtual void Draw()
         {
             if (_sprite != null)
                 _sprite.Draw(_transform);
+
+            ;
 
             Raylib.DrawText(_icon.ToString(), (int)(_position.X * 32), (int)(_position.Y * 32), 32, _rayColor);
             Raylib.DrawLine(
@@ -148,6 +151,7 @@ namespace MathForGames
                 Console.SetCursorPosition((int)_position.X, (int)_position.Y);
                 Console.Write(_icon);
             }
+            
             Console.ForegroundColor = _color;
          
             Console.ForegroundColor = Game.DefaultColor;

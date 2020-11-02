@@ -165,6 +165,7 @@ namespace MathForGames
         public void Run()
         {
             Start();
+            
 
             while (!_gameOver && !Raylib.WindowShouldClose()) 
             {
