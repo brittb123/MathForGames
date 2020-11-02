@@ -7,6 +7,7 @@ namespace MathForGames
 {
     class Player : Actor
     {
+        private Sprite sprite = new Sprite("Images/player.png");
         private float _speed = 1;
         public float Speed
         {
@@ -21,12 +22,12 @@ namespace MathForGames
         }
         public Player(float x, float y, char icon = ' ', ConsoleColor color = ConsoleColor.Red) : base(x, y, icon, color)
         {
-
+            
         }
         public Player(float x, float y, Color raycolor, char icon = ' ', ConsoleColor color = ConsoleColor.Red) : base(x, y, raycolor, icon, color)
         {
-
-        }
+         
+    }
         public override void Update(float deltaTime)
         {
 

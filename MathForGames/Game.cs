@@ -14,7 +14,7 @@ namespace MathForGames
         
         private static Scene[] _scenes;
         private static bool _gameOver = false;
-        public static ConsoleColor DefaultColor { get; set; } = ConsoleColor.White;
+        public static ConsoleColor DefaultColor { get; set; } = ConsoleColor.Green;
 
         //Static function used to set game over without an instance of game.
         public static void SetGameOver(bool value)
@@ -108,10 +108,10 @@ namespace MathForGames
             Scene scene2 = new Scene();
             scene = new Scene();
             
-            Actor actor = new Actor(0, 0, Color.YELLOW, '*', ConsoleColor.DarkBlue);
+            Actor actor = new Actor(0, 0, Color.DARKBLUE, '*', ConsoleColor.DarkBlue);
             actor.Velocity.X = 1;
             
-            Player player = new Player(0, 1, Color.RED, 'A', ConsoleColor.Yellow);
+            Player player = new Player(0, 1, Color.YELLOW, 'A', ConsoleColor.Yellow);
            
             
             scene.AddActor(actor);
@@ -146,7 +146,7 @@ namespace MathForGames
         {
             Raylib.BeginDrawing();
             
-            Raylib.ClearBackground(Color.WHITE);
+            Raylib.ClearBackground(Color.BLACK);
             _scenes[_currentScene].Draw();
             
             Raylib.EndDrawing();

@@ -21,6 +21,7 @@ namespace Math_Library
             float m21, float m22, float m23,
             float m31, float m32, float m33
                       )
+
         {
             this.m11 = m11; this.m12 = m12; this.m13 = m13;
             this.m21 = m21; this.m22 = m22; this.m23 = m23;

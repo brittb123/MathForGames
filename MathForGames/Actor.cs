@@ -15,21 +15,27 @@ namespace MathForGames
         protected ConsoleColor _color;
         protected Color _rayColor;
         private Vector2 _facing;
+        protected Matrix3 _transform = new Matrix3();
+        private Matrix3 _translation = new Matrix3();
+        private Matrix3 _rotate = new Matrix3();
+        private Matrix3 _scale = new Matrix3();
+        private Sprite _sprite = new Sprite("Images/player.png");
         public bool Started { get; private set; }
         public Vector2 Forward
         {
-            get { return _facing; }
-            set { _facing = value; }
+            get { return new Vector2(_transform.m11, _transform.m21); }
+            set { _transform.m11 = value.X; _transform.m21 = value.Y; }
         }
         public Vector2 Position
         {
             get
             {
-                return _position;
+                return new Vector2(_transform.m13, _transform.m23);
             }
             set
             {
-                _position = value;
+                _transform.m13 = value.X;
+                _transform.m23 = value.Y;
             }
         }
         public Vector2 Velocity
@@ -67,6 +73,35 @@ namespace MathForGames
 
         }
 
+        public void SetTranslate(Vector2 position)
+        {
+            _translation.m31 += Position.X;
+            _translation.m32 += Position.Y;
+        }
+
+        public void SetRotation(float radians)
+        {
+            _rotate.m11 = (float)Math.Cos(radians);
+            _rotate.m12 = (float)Math.Sin(radians);
+            _rotate.m21 = -(float)Math.Sin(radians);
+            _rotate.m22 = (float)Math.Cos(radians);
+        }
+
+        public void SetScale(float X, float Y)
+        {
+            _scale.m11 *= X;
+            _scale.m21 *= X;
+            _scale.m12 *= Y;
+            _scale.m22 *= Y;
+            
+        }
+
+        public void UpdateTransform()
+        {
+            _transform = _scale * _rotate;
+
+            _transform *= _translation;
+        }
        
 
         private void UpdateFacing()
@@ -89,11 +124,14 @@ namespace MathForGames
             
             _position.X = Math.Clamp(_position.X, 0, Console.WindowWidth-1);
             _position.Y = Math.Clamp(_position.Y, 0, Console.WindowHeight-1);
-
+            
         }
 
         public virtual void Draw()
         {
+            if (_sprite != null)
+                _sprite.Draw(_transform);
+
             Raylib.DrawText(_icon.ToString(), (int)(_position.X * 32), (int)(_position.Y * 32), 32, _rayColor);
             Raylib.DrawLine(
                 (int)(Position.X * 32),
