@@ -11,6 +11,7 @@ namespace MathForGames
         private Player Player { get; set; }
         private Actor _target;
         private Color _alertColor;
+        private Sprite _sprite;
         public Actor Target
         {
             get { return _target; }
@@ -20,7 +21,7 @@ namespace MathForGames
         public Enemy(float x, float y, char icon = ' ', ConsoleColor color = ConsoleColor.White)
             : base(x, y, icon, color)
         {
-
+            _sprite = new Sprite("Images/Enemy.png");
         }
 
         public Enemy(float x, float y, Color rayColor, char icon = ' ', ConsoleColor color = ConsoleColor.White)
@@ -33,9 +34,9 @@ namespace MathForGames
         {
             if (Target == null)
                 Target = player;
-                
 
-            Vector2 direction = Target.Position - Position;
+
+            Vector2 direction = Target.LocalPosition - LocalPosition;
             float distance = direction.Magnitude;
             float angle = (float)Math.Acos(Vector2.DotProduct(Forward, direction.Normalized));
 
@@ -47,6 +48,7 @@ namespace MathForGames
 
         public override void Update(float deltaTime)
         {
+            _sprite.Draw(_localTransform);
             if (CheckTargetInSight(1.5f, 5, Player))
             {
                 _rayColor = Color.RED;
