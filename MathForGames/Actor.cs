@@ -15,25 +15,26 @@ namespace MathForGames
         protected ConsoleColor _color;
         protected Color _rayColor;
         private Vector2 _facing;
-        protected Matrix3 _localTransform = new Matrix3();
+        protected Matrix3 _globalTransform;
+        protected Matrix3 _localtransform = new Matrix3();
         private Matrix3 _translation = new Matrix3();
         private Matrix3 _rotate = new Matrix3();
         private Matrix3 _scale = new Matrix3();
-        private Sprite _sprite = new Sprite("Images/Enemy.png");
+        private Sprite _sprite = new Sprite("Images/player.png");
         protected Actor _parent;
+        private float _rotateangel;
         protected Actor[] _children = new Actor[0];
-        protected Matrix3 _globalTransform;
         public bool Started { get; private set; }
         public Vector2 Forward
         {
-            get { return new Vector2(_localTransform.m11, _localTransform.m21); }
+            get { return new Vector2(_localtransform.m11, _localtransform.m21); }
 
         }
-        public Vector2 LocalPosition
+        public Vector2 localPosition
         {
             get
             {
-                return new Vector2(_localTransform.m13, _localTransform.m23);
+                return new Vector2(_localtransform.m13, _localtransform.m23);
             }
             set
             {
@@ -46,7 +47,7 @@ namespace MathForGames
         {
             get
             {
-               return new Vector2(_globalTransform.m13, _globalTransform.m23);
+                return new Vector2(_globalTransform.m13, _globalTransform.m23);
             }
         }
         public Vector2 Velocity
@@ -71,7 +72,7 @@ namespace MathForGames
         {
             _rayColor = Color.RED;
             _icon = icon;
-            _position = new Vector2(x, y);
+            localPosition = new Vector2(x, y);
             _color = color;
             _velocity = new Vector2();
 
@@ -129,35 +130,37 @@ namespace MathForGames
 
         public void SetRotation(float radians)
         {
+            _rotateangel = radians;
             _rotate.m11 = (float)Math.Cos(radians);
             _rotate.m12 = (float)Math.Sin(radians);
             _rotate.m21 = -(float)Math.Sin(radians);
             _rotate.m22 = (float)Math.Cos(radians);
         }
 
-        public void SetScale(float X, float Y)
+ 
+
+        public void SetScale(float x, float y)
         {
-            _scale.m11 = X;
-         
-            _scale.m22 = Y;
+            _scale.m11 = x;
+            _scale.m22 = y;
             
         }
 
         public void UpdateTransform()
         {
 
-            _localTransform = _translation * _rotate * _scale;
+            _localtransform = _translation * _rotate * _scale;
             
         }
 
 
-        //private void UpdateFacing()
-        //{
-        //    if (_velocity.Magnitude <= 0)
-        //        return;
+        private void UpdateFacing()
+        {
+            if (_velocity.Magnitude <= 0)
+                return;
 
-        //    _facing = Velocity.Normalized;
-        //}
+            
+        }
 
         public virtual void Start()
         {
@@ -166,37 +169,38 @@ namespace MathForGames
 
         public virtual void Update(float deltaTime)
         {
-
             UpdateTransform();
 
-            LocalPosition += Velocity * deltaTime;
+            UpdateFacing();
+
+            localPosition += _velocity * deltaTime;
 
         }
 
         public virtual void Draw()
         {
             if (_sprite != null)
-                _sprite.Draw(_localTransform);
+                _sprite.Draw(_localtransform);
 
 
 
-            Raylib.DrawText(_icon.ToString(), (int)(_position.X * 32), (int)(_position.Y * 32), 32, _rayColor);
+           
             Raylib.DrawLine(
-                (int)(LocalPosition.X * 32),
-                (int)(LocalPosition.Y * 32),
-                (int)((LocalPosition.X + Forward.X) * 32),
-                (int)((LocalPosition.Y + Forward.Y) * 32),
+                (int)(localPosition.X * 32),
+                (int)(localPosition.Y * 32),
+                (int)((localPosition.X + Forward.X) * 32),
+                (int)((localPosition.Y + Forward.Y) * 32),
                 Color.RED
                 );
-            if (LocalPosition.X >= 0 && LocalPosition.X < Console.WindowWidth - 1
-                && LocalPosition.Y >= 0 && LocalPosition.Y > Console.WindowHeight - 1)
+            if (localPosition.X >= 0 && localPosition.X < Console.WindowWidth
+                && localPosition.Y >= 0 && localPosition.Y > Console.WindowHeight)
             {
               
-                Console.SetCursorPosition((int)_position.X, (int)_position.Y);
+                Console.SetCursorPosition((int)localPosition.X, (int)localPosition.Y);
                 Console.Write(_icon);
             }
 
-            Console.ForegroundColor = _color;
+           
          
             Console.ForegroundColor = Game.DefaultColor;
         }

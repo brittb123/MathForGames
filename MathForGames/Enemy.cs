@@ -36,7 +36,7 @@ namespace MathForGames
                 Target = player;
 
 
-            Vector2 direction = Target.LocalPosition - LocalPosition;
+            Vector2 direction = Target.localPosition - localPosition;
             float distance = direction.Magnitude;
             float angle = (float)Math.Acos(Vector2.DotProduct(Forward, direction.Normalized));
 
@@ -48,7 +48,7 @@ namespace MathForGames
 
         public override void Update(float deltaTime)
         {
-            _sprite.Draw(_localTransform);
+            _sprite.Draw(_localtransform);
             if (CheckTargetInSight(1.5f, 5, Player))
             {
                 _rayColor = Color.RED;
