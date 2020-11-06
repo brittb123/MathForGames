@@ -112,9 +112,12 @@ namespace MathForGames
             actor.Velocity.X = 1;
             
             Player player = new Player(0, 1, Color.YELLOW, 'A', ConsoleColor.Yellow);
-            player.SetTranslate(new Vector2(1, 1));
-            player.SetRotation(1);
-            player.SetScale(1, 0);
+            
+
+            actor.Rotate(3);
+            actor.SetScale(2, 2);
+
+            scene.AddActor(actor);
 
             //scene.AddActor(actor);
             scene.AddActor(player);

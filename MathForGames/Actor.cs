@@ -24,12 +24,21 @@ namespace MathForGames
         protected Actor _parent;
         private float _rotateangel;
         protected Actor[] _children = new Actor[0];
+        private float _collideradius;
         public bool Started { get; private set; }
+        //Gets the foward direction of the player as well as sets and checks if the player is looking in a direction
         public Vector2 Forward
         {
             get { return new Vector2(_localtransform.m11, _localtransform.m21); }
-
+            set 
+            {
+                Vector2 lookPosition = localPosition + value.Normalized;
+                LookAt(lookPosition);
+            }
         }
+
+        // The players and other actors location that differs from the world scene position!
+        
         public Vector2 localPosition
         {
             get
@@ -43,6 +52,8 @@ namespace MathForGames
             }
         }
 
+        // The world position of each scene that holds actors
+
         public Vector2 WorldPosition
         {
             get
@@ -50,6 +61,8 @@ namespace MathForGames
                 return new Vector2(_globalTransform.m13, _globalTransform.m23);
             }
         }
+
+        
         public Vector2 Velocity
         {
             get
@@ -76,14 +89,17 @@ namespace MathForGames
             _color = color;
             _velocity = new Vector2();
 
-            //Forward = new Vector2(1, 0);
+            
         }
 
         public Actor(float x, float y, Color _raycolor, char icon = ' ', ConsoleColor color = ConsoleColor.Red) : this(x, y, icon, color)
         {
             _rayColor = Color.BLUE;
+            
 
         }
+
+        // Adds a child to a parent ogbject as well as set the object as a parent of the intended child
 
         public void AddChild(Actor Child)
         {
@@ -97,6 +113,7 @@ namespace MathForGames
             Child._parent = this;
         }
 
+        // Removes a child from the parent as well as sets the objects parent status to null
         public bool RemoveChild(Actor Child)
         {
             bool ChildRemoved = false;
@@ -122,6 +139,13 @@ namespace MathForGames
             return ChildRemoved;
         }
 
+        /// <summary>
+        /// The three functions here set any actor's translation, rotation, and scaler using
+        /// a different matrix for each operation. The last function muliplies all together and
+        /// combines all of the transformations then returns the new value.
+       
+        /// </summary>
+        /// <param name="position"></param>
         public void SetTranslate(Vector2 position)
         {
             _translation.m13 = position.X;
@@ -132,13 +156,16 @@ namespace MathForGames
         {
             _rotateangel = radians;
             _rotate.m11 = (float)Math.Cos(radians);
-            _rotate.m12 = (float)Math.Sin(radians);
             _rotate.m21 = -(float)Math.Sin(radians);
+            _rotate.m12 = (float)Math.Sin(radians);
             _rotate.m22 = (float)Math.Cos(radians);
         }
 
- 
-
+        public void Rotate(float radians)
+        {
+            _rotateangel += radians;
+            SetRotation(_rotateangel);
+        }
         public void SetScale(float x, float y)
         {
             _scale.m11 = x;
@@ -153,13 +180,47 @@ namespace MathForGames
             
         }
 
+        public void LookAt(Vector2 position)
+        {
+            Vector2 direction = (position - localPosition).Normalized;
 
+            float dotprod = Vector2.DotProduct(Forward, direction);
+
+            if (Math.Abs(dotprod) > 1)
+                return;
+
+            float angle = (float)Math.Acos(dotprod);
+
+            Vector2 perp = new Vector2(direction.Y, -direction.X);
+
+            float perpdot = Vector2.DotProduct(perp, Forward);
+
+            if(perpdot != 0)
+                angle *= -perpdot / Math.Abs(perpdot);
+
+            Rotate(angle);
+        }
+
+        //Checks to see if actor is colliding with the player, another actor, or an object that has a collision
+
+        public bool CheckCollision(Actor other)
+        {
+            return false;
+        }
+
+        //This function is the action the collision takes once an actor collides with another object
+        public virtual void OnCollision(Actor other)
+        {
+
+        }
+
+        //Updates player direction to be facing in a certain direction
         private void UpdateFacing()
         {
             if (_velocity.Magnitude <= 0)
                 return;
 
-            
+            Forward = Velocity.Normalized;
         }
 
         public virtual void Start()
@@ -182,9 +243,6 @@ namespace MathForGames
             if (_sprite != null)
                 _sprite.Draw(_localtransform);
 
-
-
-           
             Raylib.DrawLine(
                 (int)(localPosition.X * 32),
                 (int)(localPosition.Y * 32),
@@ -192,6 +250,7 @@ namespace MathForGames
                 (int)((localPosition.Y + Forward.Y) * 32),
                 Color.RED
                 );
+
             if (localPosition.X >= 0 && localPosition.X < Console.WindowWidth
                 && localPosition.Y >= 0 && localPosition.Y > Console.WindowHeight)
             {
@@ -200,8 +259,6 @@ namespace MathForGames
                 Console.Write(_icon);
             }
 
-           
-         
             Console.ForegroundColor = Game.DefaultColor;
         }
 

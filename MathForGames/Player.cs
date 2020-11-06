@@ -42,36 +42,6 @@ namespace MathForGames
             Velocity = new Vector2(xVelocity, yVelocity);
             Velocity = Velocity.Normalized * Speed;
 
-
-            //ConsoleKey keypressed = Game.GetNextKey();
-
-            //switch (keypressed)
-            //{
-
-            //    case ConsoleKey.A:
-            //        _velocity.X = -1;
-
-
-
-
-            //        break;
-            //    case ConsoleKey.D:
-            //        _velocity.X = 1;
-            //        break;
-            //    case ConsoleKey.S:
-            //        _velocity.Y = -1;
-            //        break;
-            //    case ConsoleKey.W:
-            //        _velocity.Y = 1;
-            //        break;
-            //    default:
-            //        _velocity.X = 0;
-            //        _velocity.Y = 0;
-            //        break;
-            //}
-
-
-
             base.Update(deltaTime);
 
         }

@@ -101,6 +101,10 @@ namespace MathForGames
             _actors = tempArray;
             return actorRemoved;
         }
+        private void CheckCollisions()
+        {
+            
+        }
 
         public virtual void Start()
         {
