@@ -114,13 +114,15 @@ namespace MathForGames
             Player player = new Player(0, 1, Color.YELLOW, 'A', ConsoleColor.Yellow);
             
 
-            actor.Rotate(3);
-            actor.SetScale(2, 2);
+            
 
             scene.AddActor(actor);
 
             //scene.AddActor(actor);
             scene.AddActor(player);
+          
+            player.SetScale(5, 5);
+            player.SetTranslate(new Vector2(10, 10));
             
 
             int startingSceneIndex = 0;
@@ -179,6 +181,7 @@ namespace MathForGames
                 Draw();
                 while (Console.KeyAvailable) 
                     Console.ReadKey(true);
+               
                 
             }
 

@@ -88,15 +88,16 @@ namespace MathForGames
             localPosition = new Vector2(x, y);
             _color = color;
             _velocity = new Vector2();
+            _localtransform = new Matrix3();
 
-            
+
         }
 
         public Actor(float x, float y, Color _raycolor, char icon = ' ', ConsoleColor color = ConsoleColor.Red) : this(x, y, icon, color)
         {
             _rayColor = Color.BLUE;
-            
-
+            _localtransform = new Matrix3();
+            localPosition = new Vector2(x, y);
         }
 
         // Adds a child to a parent ogbject as well as set the object as a parent of the intended child
@@ -170,16 +171,18 @@ namespace MathForGames
         {
             _scale.m11 = x;
             _scale.m22 = y;
-            
         }
 
+        /// <summary>
+        /// Updates transform function to combine a rotation, translation, and a scaler for the
+        /// matrix.
+        /// </summary>
         public void UpdateTransform()
         {
-
-            _localtransform = _translation * _rotate * _scale;
-            
+            _localtransform =   _rotate *_scale;
         }
 
+        // Gets the player direction they are looking at and calculates if an enemy is in the angled area
         public void LookAt(Vector2 position)
         {
             Vector2 direction = (position - localPosition).Normalized;
@@ -248,11 +251,11 @@ namespace MathForGames
                 (int)(localPosition.Y * 32),
                 (int)((localPosition.X + Forward.X) * 32),
                 (int)((localPosition.Y + Forward.Y) * 32),
-                Color.RED
+                Color.WHITE
                 );
 
             if (localPosition.X >= 0 && localPosition.X < Console.WindowWidth
-                && localPosition.Y >= 0 && localPosition.Y > Console.WindowHeight)
+                && localPosition.Y >= 0 && localPosition.Y < Console.WindowHeight)
             {
               
                 Console.SetCursorPosition((int)localPosition.X, (int)localPosition.Y);
