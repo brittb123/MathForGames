@@ -111,17 +111,13 @@ namespace MathForGames
             Actor actor = new Actor(0, 0, Color.DARKBLUE, '*', ConsoleColor.DarkBlue);
             actor.Velocity.X = 1;
             
-            Player player = new Player(0, 1, Color.YELLOW, 'A', ConsoleColor.Yellow);
+            Player player = new Player(2, 4, Color.YELLOW, 'A', ConsoleColor.Yellow);
             
-
-            
-
-            scene.AddActor(actor);
-
             //scene.AddActor(actor);
             scene.AddActor(player);
           
             player.SetScale(5, 5);
+            player.SetRotation(5);
             player.SetTranslate(new Vector2(10, 10));
             
 

@@ -19,8 +19,7 @@ namespace Math_Library
         public Matrix3(
             float m11, float m12, float m13,
             float m21, float m22, float m23,
-            float m31, float m32, float m33
-                      )
+            float m31, float m32, float m33)
 
         {
             this.m11 = m11; this.m12 = m12; this.m13 = m13;
@@ -54,19 +53,44 @@ namespace Math_Library
             return new Matrix3
                 (
                 lhs.m11 * rhs.m11 + lhs.m12 * rhs.m21 + lhs.m13 * rhs.m31,
-                lhs.m11 * rhs.m12 + lhs.m12 * rhs.m22 + lhs.m13 + rhs.m32,
-                lhs.m11 * rhs.m13 + lhs.m12 * rhs.m23 + lhs.m13 + rhs.m33,
+                lhs.m11 * rhs.m12 + lhs.m12 * rhs.m22 + lhs.m13 * rhs.m32,
+                lhs.m11 * rhs.m13 + lhs.m12 * rhs.m23 + lhs.m13 * rhs.m33,
 
                 lhs.m21 * rhs.m11 + lhs.m22 * rhs.m21 + lhs.m23 * rhs.m31,
-                lhs.m21 * rhs.m12 + lhs.m22 * rhs.m22 + lhs.m23 + rhs.m32,
-                lhs.m21 * rhs.m13 + lhs.m22 * rhs.m23 + lhs.m23 + rhs.m33,
+                lhs.m21 * rhs.m12 + lhs.m22 * rhs.m22 + lhs.m23 * rhs.m32,
+                lhs.m21 * rhs.m13 + lhs.m22 * rhs.m23 + lhs.m23 * rhs.m33,
 
                 lhs.m31 * rhs.m11 + lhs.m32 * rhs.m21 + lhs.m33 * rhs.m31,
-                lhs.m31 * rhs.m12 + lhs.m32 * rhs.m22 + lhs.m33 + rhs.m32,
-                lhs.m31 * rhs.m13 + lhs.m32 * rhs.m23 + lhs.m33 + rhs.m33
+                lhs.m31 * rhs.m12 + lhs.m32 * rhs.m22 + lhs.m33 * rhs.m32,
+                lhs.m31 * rhs.m13 + lhs.m32 * rhs.m23 + lhs.m33 * rhs.m33
                 );
         }
             
+        public static Matrix3 CreateRotations(float radians)
+        {
+            return new Matrix3((float)Math.Cos(radians), (float)Math.Sin(radians), 0,
+                -(float)Math.Sin(radians), (float)Math.Cos(radians), 0,
+                0, 0, 1
+                 );
+        }
+        public static Matrix3 CreateTranslations(Vector2 position)
+        {
+            return new Matrix3
+                ( 1, 0, position.X,
+                  0, 1, position.Y,
+                  0, 0, 1
+                );
+        }
+
+        public static Matrix3 CreateScale(Vector2 scale)
+        {
+            return new Matrix3
+                (
+                scale.X, 0, 0,
+                0, scale.Y, 0,
+                0, 0, 1
+                );
+        }
     }
     
 }

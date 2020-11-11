@@ -21,13 +21,14 @@ namespace MathForGames
         public Enemy(float x, float y, char icon = ' ', ConsoleColor color = ConsoleColor.White)
             : base(x, y, icon, color)
         {
-            _sprite = new Sprite("Images/Enemy.png");
+            _sprite = new Sprite("Images/enemy.png");
         }
 
         public Enemy(float x, float y, Color rayColor, char icon = ' ', ConsoleColor color = ConsoleColor.White)
             : base(x, y, rayColor, icon, color)
         {
             _alertColor = Color.RED;
+            _sprite = new Sprite("Images/enemy.png");
         }
 
         public bool CheckTargetInSight(float maxAngle, float maxDistance, Player player)

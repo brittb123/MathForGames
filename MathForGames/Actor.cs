@@ -30,7 +30,7 @@ namespace MathForGames
         public Vector2 Forward
         {
             get { return new Vector2(_localtransform.m11, _localtransform.m21); }
-            set 
+            set
             {
                 Vector2 lookPosition = localPosition + value.Normalized;
                 LookAt(lookPosition);
@@ -38,7 +38,7 @@ namespace MathForGames
         }
 
         // The players and other actors location that differs from the world scene position!
-        
+
         public Vector2 localPosition
         {
             get
@@ -62,7 +62,7 @@ namespace MathForGames
             }
         }
 
-        
+
         public Vector2 Velocity
         {
             get
@@ -125,7 +125,7 @@ namespace MathForGames
             int j = 0;
             for (int i = 0; i < _children.Length; i++)
             {
-                if(Child != _children[i])
+                if (Child != _children[i])
                 {
                     temparray[j] = _children[i];
                     j++;
@@ -144,44 +144,24 @@ namespace MathForGames
         /// The three functions here set any actor's translation, rotation, and scaler using
         /// a different matrix for each operation. The last function muliplies all together and
         /// combines all of the transformations then returns the new value.
-       
+
         /// </summary>
         /// <param name="position"></param>
         public void SetTranslate(Vector2 position)
         {
-            _translation.m13 = position.X;
-            _translation.m23 = position.Y;
+            _translation = Matrix3.CreateTranslations(position);
         }
 
         public void SetRotation(float radians)
         {
-            _rotateangel = radians;
-            _rotate.m11 = (float)Math.Cos(radians);
-            _rotate.m21 = -(float)Math.Sin(radians);
-            _rotate.m12 = (float)Math.Sin(radians);
-            _rotate.m22 = (float)Math.Cos(radians);
+            _rotate = Matrix3.CreateRotations(radians);
+
         }
 
         public void Rotate(float radians)
         {
-            _rotateangel += radians;
-            SetRotation(_rotateangel);
+            _rotate *= Matrix3.CreateRotations(radians);
         }
-        public void SetScale(float x, float y)
-        {
-            _scale.m11 = x;
-            _scale.m22 = y;
-        }
-
-        /// <summary>
-        /// Updates transform function to combine a rotation, translation, and a scaler for the
-        /// matrix.
-        /// </summary>
-        public void UpdateTransform()
-        {
-            _localtransform =   _rotate *_scale;
-        }
-
         // Gets the player direction they are looking at and calculates if an enemy is in the angled area
         public void LookAt(Vector2 position)
         {
@@ -198,14 +178,13 @@ namespace MathForGames
 
             float perpdot = Vector2.DotProduct(perp, Forward);
 
-            if(perpdot != 0)
+            if (perpdot != 0)
                 angle *= -perpdot / Math.Abs(perpdot);
 
             Rotate(angle);
         }
 
         //Checks to see if actor is colliding with the player, another actor, or an object that has a collision
-
         public bool CheckCollision(Actor other)
         {
             return false;
@@ -216,6 +195,22 @@ namespace MathForGames
         {
 
         }
+
+        public void SetScale(float x, float y)
+        {
+            _scale = Matrix3.CreateScale(new Vector2(x, y));
+        }
+
+        /// <summary>
+        /// Updates transform function to combine a rotation, translation, and a scaler for the
+        /// matrix.
+        /// </summary>
+        public void UpdateTransform()
+        {
+            _localtransform = _translation * _rotate * _scale;
+        }
+
+
 
         //Updates player direction to be facing in a certain direction
         private void UpdateFacing()
@@ -247,18 +242,18 @@ namespace MathForGames
                 _sprite.Draw(_localtransform);
 
             Raylib.DrawLine(
-                (int)(localPosition.X * 32),
-                (int)(localPosition.Y * 32),
-                (int)((localPosition.X + Forward.X) * 32),
-                (int)((localPosition.Y + Forward.Y) * 32),
+                (int)(WorldPosition.X * 32),
+                (int)(WorldPosition.Y * 32),
+                (int)((WorldPosition.X + Forward.X) * 32),
+                (int)((WorldPosition.Y + Forward.Y) * 32),
                 Color.WHITE
                 );
 
-            if (localPosition.X >= 0 && localPosition.X < Console.WindowWidth
-                && localPosition.Y >= 0 && localPosition.Y < Console.WindowHeight)
+            if (WorldPosition.X >= 0 && WorldPosition.X < Console.WindowWidth
+                && WorldPosition.Y >= 0 && WorldPosition.Y < Console.WindowHeight)
             {
-              
-                Console.SetCursorPosition((int)localPosition.X, (int)localPosition.Y);
+
+                Console.SetCursorPosition((int)WorldPosition.X, (int)WorldPosition.Y);
                 Console.Write(_icon);
             }
 
