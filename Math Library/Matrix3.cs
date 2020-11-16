@@ -68,7 +68,8 @@ namespace Math_Library
             
         public static Matrix3 CreateRotations(float radians)
         {
-            return new Matrix3((float)Math.Cos(radians), (float)Math.Sin(radians), 0,
+            return new Matrix3(
+                (float)Math.Cos(radians), (float)Math.Sin(radians), 0,
                 -(float)Math.Sin(radians), (float)Math.Cos(radians), 0,
                 0, 0, 1
                  );
@@ -76,7 +77,8 @@ namespace Math_Library
         public static Matrix3 CreateTranslations(Vector2 position)
         {
             return new Matrix3
-                ( 1, 0, position.X,
+                ( 
+                  1, 0, position.X,
                   0, 1, position.Y,
                   0, 0, 1
                 );

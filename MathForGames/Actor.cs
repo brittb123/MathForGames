@@ -15,12 +15,12 @@ namespace MathForGames
         protected ConsoleColor _color;
         protected Color _rayColor;
         private Vector2 _facing;
-        protected Matrix3 _globalTransform;
+        protected Matrix3 _globalTransform = new Matrix3();
         protected Matrix3 _localtransform = new Matrix3();
         private Matrix3 _translation = new Matrix3();
         private Matrix3 _rotate = new Matrix3();
         private Matrix3 _scale = new Matrix3();
-        private Sprite _sprite = new Sprite("Images/player.png");
+        private Sprite _sprite;
         protected Actor _parent;
         private float _rotateangel;
         protected Actor[] _children = new Actor[0];
@@ -89,8 +89,7 @@ namespace MathForGames
             _color = color;
             _velocity = new Vector2();
             _localtransform = new Matrix3();
-
-
+        
         }
 
         public Actor(float x, float y, Color _raycolor, char icon = ' ', ConsoleColor color = ConsoleColor.Red) : this(x, y, icon, color)
@@ -98,6 +97,7 @@ namespace MathForGames
             _rayColor = Color.BLUE;
             _localtransform = new Matrix3();
             localPosition = new Vector2(x, y);
+            
         }
 
         // Adds a child to a parent ogbject as well as set the object as a parent of the intended child
@@ -193,7 +193,10 @@ namespace MathForGames
         //This function is the action the collision takes once an actor collides with another object
         public virtual void OnCollision(Actor other)
         {
-
+            if(other.localPosition == localPosition)
+            {
+                other.SetScale(0, 0);
+            }
         }
 
         public void SetScale(float x, float y)
@@ -221,6 +224,8 @@ namespace MathForGames
             Forward = Velocity.Normalized;
         }
 
+       
+
         public virtual void Start()
         {
             Started = true;
@@ -246,7 +251,7 @@ namespace MathForGames
                 (int)(WorldPosition.Y * 32),
                 (int)((WorldPosition.X + Forward.X) * 32),
                 (int)((WorldPosition.Y + Forward.Y) * 32),
-                Color.WHITE
+                Color.RED
                 );
 
             if (WorldPosition.X >= 0 && WorldPosition.X < Console.WindowWidth

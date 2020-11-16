@@ -6,7 +6,7 @@ using Math_Library;
 
 namespace MathForGames
 {
-    class Enemy : Actor
+     class Enemy : Actor
     {
         private Player Player { get; set; }
         private Actor _target;
@@ -21,20 +21,32 @@ namespace MathForGames
         public Enemy(float x, float y, char icon = ' ', ConsoleColor color = ConsoleColor.White)
             : base(x, y, icon, color)
         {
-            _sprite = new Sprite("Images/enemy.png");
+            _sprite = new Sprite("Images/Enemy.png");
         }
 
         public Enemy(float x, float y, Color rayColor, char icon = ' ', ConsoleColor color = ConsoleColor.White)
             : base(x, y, rayColor, icon, color)
         {
             _alertColor = Color.RED;
-            _sprite = new Sprite("Images/enemy.png");
+            _sprite = new Sprite("Images/Enemy.png");
         }
 
-        public bool CheckTargetInSight(float maxAngle, float maxDistance, Player player)
+        public void EnemyLoop(float x, float y, float radians)
+        {
+          
+            if (this.localPosition.X == x && this.localPosition.Y == y)
+            {
+                for (int i = 0; radians < 2; i++)
+                {
+                    this.Rotate(1 / 2);
+                }
+            }
+        }
+
+        public bool CheckTargetInSight(float maxAngle, float maxDistance)
         {
             if (Target == null)
-                Target = player;
+                return false;
 
 
             Vector2 direction = Target.localPosition - localPosition;
@@ -50,7 +62,7 @@ namespace MathForGames
         public override void Update(float deltaTime)
         {
             _sprite.Draw(_localtransform);
-            if (CheckTargetInSight(1.5f, 5, Player))
+            if (CheckTargetInSight(1.5f, 5))
             {
                 _rayColor = Color.RED;
             }
@@ -58,7 +70,14 @@ namespace MathForGames
             {
                 _rayColor = Color.BLUE;
             }
+          
             base.Update(deltaTime);
+        }
+
+        public override void Draw()
+        {
+            _sprite.Draw(_localtransform);
+            base.Draw();
         }
     }
 }
