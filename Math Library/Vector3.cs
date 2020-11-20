@@ -4,8 +4,8 @@ using System.Text;
 
 namespace Math_Library
 {
-    class Vector3
-    {
+   public class Vector3
+   {
         private float _x;
         private float _y;
         private float _z;
@@ -85,6 +85,11 @@ namespace Math_Library
         }
 
         public static Vector3 operator *(Vector3 lhs, float scaler)
+        {
+            return new Vector3(lhs.X * scaler, lhs.Y * scaler, lhs.Z * scaler);
+        }
+
+        public static Vector3 operator *(float scaler, Vector3 lhs)
         {
             return new Vector3(lhs.X * scaler, lhs.Y * scaler, lhs.Z * scaler);
         }

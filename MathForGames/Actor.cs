@@ -11,7 +11,7 @@ namespace MathForGames
     {
         protected char _icon = ' ';
         protected Vector2 _position;
-        protected Vector2 _velocity;
+        private Vector2 _velocity = new Vector2();
         protected ConsoleColor _color;
         protected Color _rayColor;
         private Vector2 _facing;
@@ -25,6 +25,8 @@ namespace MathForGames
         private float _rotateangel;
         protected Actor[] _children = new Actor[0];
         private float _collideradius;
+        private Vector2 accelration = new Vector2();
+        private float _maxSpeed = 5;
         public bool Started { get; private set; }
         //Gets the foward direction of the player as well as sets and checks if the player is looking in a direction
         public Vector2 Forward
@@ -75,6 +77,8 @@ namespace MathForGames
             }
         }
 
+        protected Vector2 Accelration { get => accelration; set => accelration = value; }
+        public float MaxSpeed { get => _maxSpeed; set => _maxSpeed = value; }
 
         public Actor()
         {
@@ -236,6 +240,13 @@ namespace MathForGames
             UpdateTransform();
 
             UpdateFacing();
+
+            Velocity += Accelration;
+
+            if (Velocity.Magnitude > MaxSpeed)
+            {
+                Velocity = Velocity.Normalized * MaxSpeed;
+            }
 
             localPosition += _velocity * deltaTime;
 
