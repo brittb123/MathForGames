@@ -84,7 +84,7 @@ namespace Math_Library
             return new Vector4();
         }
 
-        public static Matrix4 RotationZ(float radians)
+        public static Matrix4 CreateRotationZ(float radians)
         {
             
                  return new Matrix4
@@ -96,7 +96,7 @@ namespace Math_Library
                 );
         }
 
-        public static Matrix4 RotationX(float radians)
+        public static Matrix4 CreateRotationX(float radians)
         {
             return new Matrix4
                 (   1, 0, 0, 0,
@@ -106,7 +106,7 @@ namespace Math_Library
                 );
         }
 
-        public static Matrix4 RotationY(float radians)
+        public static Matrix4 CreateRotationY(float radians)
         {
             return new Matrix4
                 (

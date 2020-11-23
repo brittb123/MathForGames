@@ -8,7 +8,8 @@ namespace MathForGames
     class Player : Actor
     {
         private Sprite sprite;
-        private float _speed = 3;
+        private float _speed = 1;
+        
         public float Speed
         {
             get
@@ -29,6 +30,8 @@ namespace MathForGames
             sprite = new Sprite("Images/player.png");
         }
 
+        
+
         public override void Update(float deltaTime)
         {
 
@@ -41,6 +44,7 @@ namespace MathForGames
 
             Accelration = new Vector2(xVelocity, yVelocity);
            
+            
 
             base.Update(deltaTime);
 

@@ -24,7 +24,7 @@ namespace MathForGames
         protected Actor _parent;
         private float _rotateangel;
         protected Actor[] _children = new Actor[0];
-        private float _collideradius;
+        protected float _collideradius;
         private Vector2 accelration = new Vector2();
         private float _maxSpeed = 5;
         public bool Started { get; private set; }
@@ -197,9 +197,9 @@ namespace MathForGames
         //This function is the action the collision takes once an actor collides with another object
         public virtual void OnCollision(Actor other)
         {
-            if(other.localPosition == localPosition)
+            if(other._collideradius == _collideradius)
             {
-                other.SetScale(0, 0);
+                SetScale(20, 20);
             }
         }
 
@@ -240,6 +240,7 @@ namespace MathForGames
             UpdateTransform();
 
             UpdateFacing();
+           
 
             Velocity += Accelration;
 

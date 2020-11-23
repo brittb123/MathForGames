@@ -15,6 +15,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MathForGames3D", "MathForGa
 		{2BB4CEDF-A418-4330-A3E4-75E93ED9EF28} = {2BB4CEDF-A418-4330-A3E4-75E93ED9EF28}
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestProject", "UnitTestProject\UnitTestProject.csproj", "{2731BE78-C467-4E92-9381-4F6B9EA68963}"
+	ProjectSection(ProjectDependencies) = postProject
+		{C4876B82-10CB-4F73-A6AA-822E0F7EAD07} = {C4876B82-10CB-4F73-A6AA-822E0F7EAD07}
+		{2BB4CEDF-A418-4330-A3E4-75E93ED9EF28} = {2BB4CEDF-A418-4330-A3E4-75E93ED9EF28}
+		{CB038BE2-FB93-4210-9924-6E8530444AEF} = {CB038BE2-FB93-4210-9924-6E8530444AEF}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +40,10 @@ Global
 		{C4876B82-10CB-4F73-A6AA-822E0F7EAD07}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C4876B82-10CB-4F73-A6AA-822E0F7EAD07}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C4876B82-10CB-4F73-A6AA-822E0F7EAD07}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2731BE78-C467-4E92-9381-4F6B9EA68963}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2731BE78-C467-4E92-9381-4F6B9EA68963}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2731BE78-C467-4E92-9381-4F6B9EA68963}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2731BE78-C467-4E92-9381-4F6B9EA68963}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

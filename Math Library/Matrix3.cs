@@ -74,6 +74,14 @@ namespace Math_Library
                 0, 0, 1
                  );
         }
+        public static Matrix3 CreateRotation(float radians)
+        {
+            return new Matrix3(
+                (float)Math.Cos(radians), (float)Math.Sin(radians), 0,
+                -(float)Math.Sin(radians), (float)Math.Cos(radians), 0,
+                0, 0, 1
+                 );
+        }
         public static Matrix3 CreateTranslations(Vector2 position)
         {
             return new Matrix3
@@ -83,6 +91,16 @@ namespace Math_Library
                   0, 0, 1
                 );
         }
+        public static Matrix3 CreateTranslation(Vector2 position)
+        {
+            return new Matrix3
+                (
+                  1, 0, position.X,
+                  0, 1, position.Y,
+                  0, 0, 1
+                );
+        }
+
 
         public static Matrix3 CreateScale(Vector2 scale)
         {
@@ -92,6 +110,11 @@ namespace Math_Library
                 0, scale.Y, 0,
                 0, 0, 1
                 );
+        }
+
+        public static Vector3 operator *(Matrix3 lhs, Vector3 rhs)
+        {
+            return new Vector3();
         }
     }
     

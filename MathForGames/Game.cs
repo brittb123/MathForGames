@@ -127,7 +127,7 @@ namespace MathForGames
             enemy.SetScale(6, 6);
             enemy.SetRotation(3/2);
             player.SetScale(2, 2);
-            player.SetRotation(0);
+           
             player.SetTranslate(new Vector2(5, 10));
 
             int startingSceneIndex = 0;
@@ -144,6 +144,8 @@ namespace MathForGames
         //Called every frame.
         public void Update(float deltaTime)
         {
+            
+
             if (!_scenes[_currentScene].Started) 
                 _scenes[_currentScene].Start();
 
@@ -185,8 +187,6 @@ namespace MathForGames
                 Draw();
                 while (Console.KeyAvailable) 
                     Console.ReadKey(true);
-               
-                
             }
 
             End();
