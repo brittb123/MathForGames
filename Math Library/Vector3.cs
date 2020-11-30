@@ -79,17 +79,17 @@ namespace Math_Library
             return new Vector3(x, y, z);
         }
 
-        public static Vector3 Normalize(Vector3 vector)
+        public static Vector3 Normalize(Vector3 vector3)
         {
-            if (vector.Magnitude == 0)
+            if (vector3.Magnitude == 0)
                 return new Vector3();
 
-           return vector / vector.Magnitude;
+           return vector3 / vector3.Magnitude;
         }
 
         public static float DotProduct(Vector3 lhs, Vector3 rhs)
         {
-            return (lhs.X * rhs.X) + (lhs.Y * rhs.Y);
+            return (lhs.X * rhs.X) + (lhs.Y * rhs.Y) + (lhs.Z * rhs.Z);
         }
 
         public static Vector3 operator -(Vector3 lhs, Vector3 rhs)

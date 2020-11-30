@@ -21,20 +21,20 @@ namespace MathForGames
                 _speed = value;
             }
         }
+
         public Player(float x, float y, char icon = ' ', ConsoleColor color = ConsoleColor.Red) : base(x, y, icon, color)
         {
             sprite = new Sprite("Images/player.png");
+            _collideradius = 5;
         }
         public Player(float x, float y, Color raycolor, char icon = ' ', ConsoleColor color = ConsoleColor.Red) : base(x, y, raycolor, icon, color)
         {
             sprite = new Sprite("Images/player.png");
+            _collideradius = 5;
         }
-
-        
 
         public override void Update(float deltaTime)
         {
-
 
             int xVelocity = -Convert.ToInt32(Game.GetKeyDown((int)KeyboardKey.KEY_A)) +
                 Convert.ToInt32(Game.GetKeyDown((int)KeyboardKey.KEY_D));
@@ -43,9 +43,7 @@ namespace MathForGames
                 Convert.ToInt32(Game.GetKeyDown((int)KeyboardKey.KEY_S));
 
             Accelration = new Vector2(xVelocity, yVelocity);
-           
-            
-
+          
             base.Update(deltaTime);
 
         }

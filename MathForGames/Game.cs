@@ -23,6 +23,7 @@ namespace MathForGames
             _gameOver = value;
         }
 
+        //Add a scene into an array of scenes for actors to use
         public static int AddScenes(Scene scene)
         {
             Scene[] temparray = new Scene[_scenes.Length + 1];
@@ -36,6 +37,7 @@ namespace MathForGames
             return index;
         }
 
+        // Removes the scene chosen while keep the other scenes in order
         public static bool RemoveScene(Scene scene)
         {
             if (scene == null)
@@ -114,19 +116,19 @@ namespace MathForGames
             
             Player player = new Player(2, 4, Color.YELLOW, 'A', ConsoleColor.Yellow);
 
-            Enemy enemy = new Enemy(5, 6, Color.MAROON, ' ', ConsoleColor.Green);
-            
-           
+            Enemy enemy = new Enemy(5, 5, Color.MAROON, ' ', ConsoleColor.Green);
+
+            enemy.Velocity.X = 1;
             
             //scene.AddActor(actor);
             scene.AddActor(player);
             scene.AddActor(actor);
             scene.AddActor(enemy);
 
-            enemy.SetTranslate(new Vector2(10, 15));
-            enemy.SetScale(6, 6);
-            enemy.SetRotation(3/2);
-            player.SetScale(2, 2);
+            enemy.SetTranslate(new Vector2(4, 5));
+            enemy.SetScale(3, 3);
+            
+            player.SetScale(1, 1);
            
             player.SetTranslate(new Vector2(5, 10));
 
@@ -136,8 +138,6 @@ namespace MathForGames
 
             SetCurrentScene(startingSceneIndex);
 
-            enemy.EnemyLoop(5, 5, 1);
-            
         }
 
 
@@ -182,7 +182,7 @@ namespace MathForGames
             while (!_gameOver && !Raylib.WindowShouldClose()) 
             {
                 float deltaTime = Raylib.GetFrameTime();
-                
+               
                 Update(deltaTime);
                 Draw();
                 while (Console.KeyAvailable) 

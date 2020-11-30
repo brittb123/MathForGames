@@ -166,6 +166,7 @@ namespace MathForGames
         {
             _rotate *= Matrix3.CreateRotations(radians);
         }
+
         // Gets the player direction they are looking at and calculates if an enemy is in the angled area
         public void LookAt(Vector2 position)
         {
@@ -189,18 +190,22 @@ namespace MathForGames
         }
 
         //Checks to see if actor is colliding with the player, another actor, or an object that has a collision
-        public bool CheckCollision(Actor other)
-        {
-            return false;
-        }
+        //public bool CheckCollision(Actor other)
+        //{
+        //    if (this._collideradius + other._collideradius <)
+        //    {
+        //        OnCollision(other);
+        //        return true;
+        //    }
+        //    return false;
+        //}
 
         //This function is the action the collision takes once an actor collides with another object
         public virtual void OnCollision(Actor other)
         {
-            if(other._collideradius == _collideradius)
-            {
+            
                 SetScale(20, 20);
-            }
+            
         }
 
         public void SetScale(float x, float y)

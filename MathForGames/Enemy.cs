@@ -12,6 +12,8 @@ namespace MathForGames
         private Actor _target;
         private Color _alertColor;
         private Sprite _sprite;
+        private float enemyCount;
+        
         public Actor Target
         {
             get { return _target; }
@@ -22,6 +24,7 @@ namespace MathForGames
             : base(x, y, icon, color)
         {
             _sprite = new Sprite("Images/Enemy.png");
+            _collideradius = 5;
         }
 
         public Enemy(float x, float y, Color rayColor, char icon = ' ', ConsoleColor color = ConsoleColor.White)
@@ -29,20 +32,28 @@ namespace MathForGames
         {
             _alertColor = Color.RED;
             _sprite = new Sprite("Images/Enemy.png");
+            _collideradius = 5;
         }
 
+
+        // The enemy will loop at a certain chosen point of the screen
         public void EnemyLoop(float x, float y, float radians)
         {
           
-            if (this.localPosition.X == x && this.localPosition.Y == y)
+            if (localPosition.X == x && localPosition.Y == y)
             {
                 for (int i = 0; radians < 2; i++)
                 {
-                    this.Rotate(1 / 2);
+                    this.Velocity.X = 0;
+                    this.Velocity.Y = 0;
+                   Rotate(1);
+                    radians++;
                 }
             }
         }
+       
 
+        //Checks to see if the player or a different target is in line of sight for attacking
         public bool CheckTargetInSight(float maxAngle, float maxDistance)
         {
             if (Target == null)
@@ -70,6 +81,8 @@ namespace MathForGames
             {
                 _rayColor = Color.BLUE;
             }
+
+            EnemyLoop(5, 5, 0);
           
             base.Update(deltaTime);
         }
