@@ -10,7 +10,7 @@ namespace Math_Library
         private float _x;
         private float _y;
         private float _z;
-        private float _w;
+        private float _W;
 
         public float X
         {
@@ -50,7 +50,7 @@ namespace Math_Library
             }
 
         }
-        public float W { get { return _w; } set { _w = value; } }
+        public float W { get { return _W; } set { _W = value; } }
         public float Magnitude
         {
             get
@@ -64,7 +64,7 @@ namespace Math_Library
             _x = 0;
             _y = 0;
             _z = 0;
-            _w = 0;
+            _W = 0;
         }
 
         public Vector4(float x, float y, float z, float w)
@@ -72,7 +72,7 @@ namespace Math_Library
             _x = x;
             _y = y;
             _z = z;
-            _w = w;
+            _W = w;
         }
 
         public Vector4 Normalized

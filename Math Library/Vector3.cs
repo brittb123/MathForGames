@@ -79,12 +79,12 @@ namespace Math_Library
             return new Vector3(x, y, z);
         }
 
-        public static Vector3 Normalize(Vector3 vector3)
+        public static Vector3 Normalize(Vector3 vector)
         {
-            if (vector3.Magnitude == 0)
+            if (vector.Magnitude == 0)
                 return new Vector3();
 
-           return vector3 / vector3.Magnitude;
+           return vector / vector.Magnitude;
         }
 
         public static float DotProduct(Vector3 lhs, Vector3 rhs)
@@ -114,7 +114,7 @@ namespace Math_Library
 
         public static Vector3 CrossProduct(Vector3 lhs, Vector3 rhs)
         {
-            return new Vector3();
+            return new Vector3(lhs.Y * rhs.Z - lhs.Z * rhs.Y, lhs.Z * rhs.X - lhs.X * rhs.Z, lhs.X * rhs.Y - lhs.Y * rhs.X);
         }
 
 
