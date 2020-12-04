@@ -27,6 +27,7 @@ namespace Math_Library
             this.m31 = m31; this.m32 = m32; this.m33 = m33;
         }
 
+        //Operator that adds two matricies to together
         public static Matrix3 operator +(Matrix3 lhs, Matrix3 rhs)
         {
             return new Matrix3
@@ -37,6 +38,7 @@ namespace Math_Library
                 );
         }
 
+        //Operator that subtracts two matrices and returns the new matrix
         public static Matrix3 operator -(Matrix3 lhs, Matrix3 rhs)
         {
             return new Matrix3
@@ -47,7 +49,8 @@ namespace Math_Library
                 );
         }
 
-
+        //The operator that multplies the two matrices together and returns a new matrix
+        //with the newly obtained values
         public static Matrix3 operator *(Matrix3 lhs, Matrix3 rhs)
         {
             return new Matrix3
@@ -66,14 +69,7 @@ namespace Math_Library
                 );
         }
             
-        public static Matrix3 CreateRotations(float radians)
-        {
-            return new Matrix3(
-                (float)Math.Cos(radians), (float)Math.Sin(radians), 0,
-                -(float)Math.Sin(radians), (float)Math.Cos(radians), 0,
-                0, 0, 1
-                 );
-        }
+        //The entity is rotates using the matrix and rotates the object
         public static Matrix3 CreateRotation(float radians)
         {
             return new Matrix3(
@@ -82,15 +78,8 @@ namespace Math_Library
                 0, 0, 1
                  );
         }
-        public static Matrix3 CreateTranslations(Vector2 position)
-        {
-            return new Matrix3
-                ( 
-                  1, 0, position.X,
-                  0, 1, position.Y,
-                  0, 0, 1
-                );
-        }
+      
+        // The object is tranlated across to a specific point using this matrix
         public static Matrix3 CreateTranslation(Vector2 position)
         {
             return new Matrix3
@@ -101,7 +90,7 @@ namespace Math_Library
                 );
         }
 
-
+        // An object's X and Y is scaled to a chosen number and streched or shrunk to the size
         public static Matrix3 CreateScale(Vector2 scale)
         {
             return new Matrix3
@@ -114,7 +103,10 @@ namespace Math_Library
 
         public static Vector3 operator *(Matrix3 lhs, Vector3 rhs)
         {
-            return new Vector3();
+            float a = lhs.m11 * rhs.X + lhs.m12 * rhs.Y + lhs.m13 * rhs.Z;
+            float b = lhs.m21 * rhs.X + lhs.m22 * rhs.Y + lhs.m23 * rhs.Z;
+            float c = lhs.m31 * rhs.X + lhs.m32 * rhs.Y + lhs.m33 * rhs.Z;
+            return new Vector3(a, b, c); 
         }
     }
     

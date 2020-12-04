@@ -109,7 +109,7 @@ namespace Math_Library
 
         public static Vector3 operator /(Vector3 lhs, float scalar)
         {
-            return new Vector3(lhs.X / scalar, lhs.Y / scalar, lhs.Z * scalar);
+            return new Vector3(lhs.X / scalar, lhs.Y / scalar, lhs.Z / scalar);
         }
 
         public static Vector3 CrossProduct(Vector3 lhs, Vector3 rhs)

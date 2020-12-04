@@ -153,18 +153,18 @@ namespace MathForGames
         /// <param name="position"></param>
         public void SetTranslate(Vector2 position)
         {
-            _translation = Matrix3.CreateTranslations(position);
+            _translation = Matrix3.CreateTranslation(position);
         }
 
         public void SetRotation(float radians)
         {
-            _rotate = Matrix3.CreateRotations(radians);
+            _rotate = Matrix3.CreateRotation(radians);
 
         }
 
         public void Rotate(float radians)
         {
-            _rotate *= Matrix3.CreateRotations(radians);
+            _rotate *= Matrix3.CreateRotation(radians);
         }
 
         // Gets the player direction they are looking at and calculates if an enemy is in the angled area
