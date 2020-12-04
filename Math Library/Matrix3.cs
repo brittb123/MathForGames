@@ -103,9 +103,9 @@ namespace Math_Library
 
         public static Vector3 operator *(Matrix3 lhs, Vector3 rhs)
         {
-            float a = lhs.m11 * rhs.X + lhs.m12 * rhs.Y + lhs.m13 * rhs.Z;
-            float b = lhs.m21 * rhs.X + lhs.m22 * rhs.Y + lhs.m23 * rhs.Z;
-            float c = lhs.m31 * rhs.X + lhs.m32 * rhs.Y + lhs.m33 * rhs.Z;
+            float a = lhs.m11 * rhs.X + lhs.m21 * rhs.X + lhs.m31 * rhs.X;
+            float b = lhs.m12 * rhs.Y + lhs.m22 * rhs.Y + lhs.m32 * rhs.Y;
+            float c = lhs.m33 * rhs.Z + lhs.m23 * rhs.Z + lhs.m33 * rhs.Z;
             return new Vector3(a, b, c); 
         }
     }
