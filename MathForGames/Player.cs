@@ -5,10 +5,11 @@ using Raylib_cs;
 using Math_Library;
 namespace MathForGames
 {
-    class Player : Actor
+   public class Player : Actor
     {
         private Sprite sprite;
         private float _speed = 1;
+       
         
         public float Speed
         {
@@ -35,15 +36,20 @@ namespace MathForGames
 
         public override void Update(float deltaTime)
         {
+           int xDirection = -Convert.ToInt32(Game.GetKeyDown((int)KeyboardKey.KEY_A))
+                + Convert.ToInt32(Game.GetKeyDown((int)KeyboardKey.KEY_D));
+            int yDirection = -Convert.ToInt32(Game.GetKeyDown((int)KeyboardKey.KEY_W))
+                + Convert.ToInt32(Game.GetKeyDown((int)KeyboardKey.KEY_S));
 
-            int xVelocity = -Convert.ToInt32(Game.GetKeyDown((int)KeyboardKey.KEY_A)) +
-                Convert.ToInt32(Game.GetKeyDown((int)KeyboardKey.KEY_D));
 
-            int yVelocity = -Convert.ToInt32(Game.GetKeyDown((int)KeyboardKey.KEY_W)) +
-                Convert.ToInt32(Game.GetKeyDown((int)KeyboardKey.KEY_S));
+            Accelration = new Vector2(xDirection, yDirection);
+            if (Velocity.Magnitude > MaxSpeed)
+            {
+                Velocity = Velocity.Normalized * MaxSpeed;
+            }
 
-            Accelration = new Vector2(xVelocity, yVelocity);
-          
+            Velocity = Velocity.Normalized * Speed;
+
             base.Update(deltaTime);
 
         }

@@ -81,7 +81,11 @@ namespace Math_Library
 
         public static Vector4 operator *(Matrix4 lhs, Vector4 rhs)
         {
-            return new Vector4();
+            float a = lhs.m11 * rhs.X + lhs.m12 * rhs.Y + lhs.m13 * rhs.Z + lhs.m14 * rhs.W;
+            float b = lhs.m21 * rhs.X + lhs.m22 * rhs.Y + lhs.m23 * rhs.Z + lhs.m24 * rhs.W;
+            float c = lhs.m31 * rhs.X + lhs.m32 * rhs.Y + lhs.m33 * rhs.Z + lhs.m34 * rhs.W;
+            float d = lhs.m41 * rhs.X + lhs.m42 * rhs.Y + lhs.m43 * rhs.Z + lhs.m44 * rhs.W;
+            return new Vector4(a, b, c, d);
         }
 
         public static Matrix4 CreateRotationZ(float radians)

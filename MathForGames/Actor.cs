@@ -25,7 +25,7 @@ namespace MathForGames
         private float _rotateangel;
         protected Actor[] _children = new Actor[0];
         protected float _collideradius;
-        private Vector2 accelration = new Vector2();
+        protected Vector2 accelration = new Vector2();
         private float _maxSpeed = 5;
         public bool Started { get; private set; }
         //Gets the foward direction of the player as well as sets and checks if the player is looking in a direction
@@ -77,7 +77,7 @@ namespace MathForGames
             }
         }
 
-        protected Vector2 Accelration { get => accelration; set => accelration = value; }
+        public Vector2 Accelration { get => accelration; set => accelration = value; }
         public float MaxSpeed { get => _maxSpeed; set => _maxSpeed = value; }
 
         public Actor()
@@ -190,15 +190,16 @@ namespace MathForGames
         }
 
         //Checks to see if actor is colliding with the player, another actor, or an object that has a collision
-        //public bool CheckCollision(Actor other)
-        //{
-        //    if (this._collideradius + other._collideradius <)
-        //    {
-        //        OnCollision(other);
-        //        return true;
-        //    }
-        //    return false;
-        //}
+        public bool CheckCollision(Actor other)
+        {
+            float distance = (other.localPosition.X - localPosition.X) + (other.localPosition.Y - localPosition.Y);
+            if (this.distance + other._collideradius<)
+            {
+            OnCollision(other);
+            return true;
+        }
+            return false;
+        }
 
         //This function is the action the collision takes once an actor collides with another object
         public virtual void OnCollision(Actor other)
