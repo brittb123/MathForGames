@@ -114,7 +114,7 @@ namespace MathForGames
             Actor actor = new Actor(0, 0, Color.DARKBLUE, '*', ConsoleColor.DarkBlue);
             actor.Velocity.X = 1;
             
-            Player player = new Player(2, 4, Color.YELLOW, 'A', ConsoleColor.Yellow);
+            Player player = new Player(10, 5, Color.YELLOW, 'A', ConsoleColor.Yellow);
 
             Enemy enemy = new Enemy(5, 5, Color.MAROON, ' ', ConsoleColor.Green);
 
@@ -122,7 +122,7 @@ namespace MathForGames
             
             //scene.AddActor(actor);
             scene.AddActor(player);
-            scene.AddActor(actor);
+            
             scene.AddActor(enemy);
 
             enemy.SetTranslate(new Vector2(4, 5));
@@ -130,13 +130,15 @@ namespace MathForGames
             
             player.SetScale(1, 1);
            
-            player.SetTranslate(new Vector2(5, 10));
+            player.SetTranslate(new Vector2 (10, 5));
 
             int startingSceneIndex = 0;
 
             startingSceneIndex = AddScenes(scene);
 
             SetCurrentScene(startingSceneIndex);
+           
+        
 
         }
 
@@ -150,6 +152,8 @@ namespace MathForGames
                 _scenes[_currentScene].Start();
 
             _scenes[_currentScene].Update(deltaTime);
+            
+            
 
         }
 

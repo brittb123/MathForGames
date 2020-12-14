@@ -6,7 +6,7 @@ using System.Text;
 namespace MathForGames
 {
     
-    class Scene
+    public class Scene
     {
         private Actor[] _actors;
         public bool Started { get; private set; }
@@ -101,9 +101,15 @@ namespace MathForGames
             _actors = tempArray;
             return actorRemoved;
         }
-        private void CheckCollisions()
+
+        private void CheckCollision()
         {
-            
+           for(int i = 0; i < _actors.Length; i++)
+            {
+                for(int j = 0; j < _actors.Length; j++)
+                _actors[i].CheckCollision(_actors[j]);
+                
+            }
         }
 
         public virtual void Start()
@@ -117,7 +123,10 @@ namespace MathForGames
             {
                 if (!_actors[i].Started)
                     _actors[i].Start();
+                   CheckCollision();
+              
                 _actors[i].Update(deltaTime);
+                
             }
         }
 
