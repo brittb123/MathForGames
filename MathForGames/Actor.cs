@@ -189,11 +189,21 @@ namespace MathForGames
             Rotate(angle);
         }
 
+        public bool Distance(Vector2 pos1, Vector2 pos2)
+        {
+            float NewX = pos2.X - pos1.X;
+            float NewY = pos2.Y - pos1.X;
+
+            Vector2 Dist = new Vector2(NewX, NewY);
+           float checkcollide = Dist / Dist.Magnitude;
+        }
+
         //Checks to see if actor is colliding with the player, another actor, or an object that has a collision
         public bool CheckCollision(Actor other)
         {
-            float distance = (other.localPosition.X - localPosition.X) + (other.localPosition.Y - localPosition.Y);
-            if (this.distance + other._collideradius<)
+             Distance(this._position, other._position);
+
+            //if (this.distance + other._collideradius<)
             {
             OnCollision(other);
             return true;
