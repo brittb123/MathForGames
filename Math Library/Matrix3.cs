@@ -101,6 +101,7 @@ namespace Math_Library
                 );
         }
 
+        // Allows a matrix3 be multipled to a vector to return a new vector
         public static Vector3 operator *(Matrix3 lhs, Vector3 rhs)
         {
             float a = lhs.m11 * rhs.X + lhs.m12 * rhs.Y + lhs.m13 * rhs.Z;

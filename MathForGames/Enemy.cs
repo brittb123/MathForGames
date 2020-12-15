@@ -24,15 +24,16 @@ namespace MathForGames
             : base(x, y, icon, color)
         {
             _sprite = new Sprite("Images/Enemy.png");
-            _collideradius = 5;
+            _collideradius = 1;
         }
 
         public Enemy(float x, float y, Color rayColor, char icon = ' ', ConsoleColor color = ConsoleColor.White)
             : base(x, y, rayColor, icon, color)
         {
-            _alertColor = Color.RED;
+           
             _sprite = new Sprite("Images/Enemy.png");
-            _collideradius = 5;
+            _collideradius = 1;
+            Velocity.Y = 6;
         }
 
 

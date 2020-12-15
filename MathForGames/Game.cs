@@ -107,38 +107,49 @@ namespace MathForGames
             
             Console.CursorVisible = false;
             
-            Scene scene = new Scene();
-            Scene scene2 = new Scene();
-            scene = new Scene();
+            Scene scene1 = new Scene();
+          
             
+          
+
+
             Actor actor = new Actor(0, 0, Color.DARKBLUE, '*', ConsoleColor.DarkBlue);
             actor.Velocity.X = 1;
             
-            Player player = new Player(10, 5, Color.YELLOW, 'A', ConsoleColor.Yellow);
+            Player player = new Player(9, 1, Color.YELLOW, 'A', ConsoleColor.Yellow);
 
-            Enemy enemy = new Enemy(5, 5, Color.MAROON, ' ', ConsoleColor.Green);
+            Enemy enemy = new Enemy(2, 1, Color.MAROON, ' ', ConsoleColor.Green);
 
-            enemy.Velocity.X = 1;
             
+
             //scene.AddActor(actor);
-            scene.AddActor(player);
-            
-            scene.AddActor(enemy);
+            scene1.AddActor(player);
 
-            enemy.SetTranslate(new Vector2(4, 5));
+            scene1.AddActor(enemy);
+
+            //enemy.SetTranslate(new Vector2(4, 5));
             enemy.SetScale(3, 3);
+            enemy.Velocity.Y = 6;
             
             player.SetScale(1, 1);
-           
-            player.SetTranslate(new Vector2 (10, 5));
+            enemy.Target = player;
+
+            //player.SetTranslate(new Vector2 (10, 5));
+
 
             int startingSceneIndex = 0;
+            startingSceneIndex = AddScenes(scene1);
 
-            startingSceneIndex = AddScenes(scene);
 
             SetCurrentScene(startingSceneIndex);
-           
-        
+
+
+
+
+
+
+
+
 
         }
 

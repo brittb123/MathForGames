@@ -101,6 +101,7 @@ namespace MathForGames
             _rayColor = Color.BLUE;
             _localtransform = new Matrix3();
             localPosition = new Vector2(x, y);
+           
             
         }
 
@@ -200,11 +201,9 @@ namespace MathForGames
         //Checks to see if actor is colliding with the player, another actor, or an object that has a collision
         public bool CheckCollision(Actor other)
         {
-            if(Distance(this.localPosition, other.localPosition) < this._collideradius + other._collideradius)
-            {
-                return true;
-            }
-            return false;
+
+            float distance = (other.localPosition - localPosition).Magnitude;
+            return distance <= other._collideradius + _collideradius;
         }
 
         //This function is the action the collision takes once an actor collides with another object

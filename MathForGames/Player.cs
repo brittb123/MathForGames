@@ -26,12 +26,12 @@ namespace MathForGames
         public Player(float x, float y, char icon = ' ', ConsoleColor color = ConsoleColor.Red) : base(x, y, icon, color)
         {
             sprite = new Sprite("Images/player.png");
-            _collideradius = 5;
+            _collideradius = 2;
         }
         public Player(float x, float y, Color raycolor, char icon = ' ', ConsoleColor color = ConsoleColor.Red) : base(x, y, raycolor, icon, color)
         {
             sprite = new Sprite("Images/player.png");
-            _collideradius = 5;
+            _collideradius = 2;
         }
 
         public override void Update(float deltaTime)

@@ -32,6 +32,8 @@ namespace Math_Library
                 _y = value;
             }
         }
+
+        //Gets the magnitude and makes it easily obtainable!
         public float Magnitude
         {
             get
@@ -41,10 +43,10 @@ namespace Math_Library
         }
 
       public Vector2()
-        {
+     {
             _x = 0;
             _y = 0;
-        }
+      }
         public Vector2(float x, float y)
         {
             _x = x;
@@ -79,6 +81,8 @@ namespace Math_Library
 
 
         }
+
+        // Divides the vector by its magnitude and normalizes the vector
         public static Vector2 Normalize(Vector2 vector2)
         {
             if (vector2.Magnitude == 0)
@@ -87,21 +91,25 @@ namespace Math_Library
             return vector2 / vector2.Magnitude;
         }
 
+        // Allows the - operator to subtract two vectors and return a new vector
         public static Vector2 operator -(Vector2 lhs, Vector2 rhs)
         {
             return new Vector2(lhs.X - rhs.X, lhs.Y - rhs.Y);
         }
 
+        // Overloads the * operator that multiplies the vector by a scalar
         public static Vector2 operator *(Vector2 lhs, float scaler)
         {
             return new Vector2(lhs.X * scaler, lhs.Y * scaler);
         }
 
+        // Overloads the / operator and divides the vector by the scalar 
         public static Vector2 operator /(Vector2 lhs, float scalar)
         {
             return new Vector2(lhs.X / scalar, lhs.Y / scalar);
         }
 
+        // Gets the Magnitude of a vector
         public float GetMagnitude()
         {
             return (float)Math.Sqrt(X * X + Y * Y);

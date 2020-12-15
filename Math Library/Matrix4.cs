@@ -30,6 +30,7 @@ namespace Math_Library
             this.m41 = m41; this.m42 = m42; this.m43 = m43; this.m44 = m44;
         }
 
+        // Allows the matrix4 to be added to another and returns with a new matrix of the sums
         public static Matrix4 operator +(Matrix4 lhs, Matrix4 rhs)
         {
             return new Matrix4
@@ -41,6 +42,7 @@ namespace Math_Library
                 ) ;
         }
 
+        //Subtracts two Matrices and returns with a matrix with the difference
         public static Matrix4 operator -(Matrix4 lhs, Matrix4 rhs)
         {
             return new Matrix4
@@ -88,6 +90,14 @@ namespace Math_Library
             return new Vector4(a, b, c, d);
         }
 
+        /// <summary>
+        /// The following functions allow for rotation of the different axis, translation among the positions, and
+        /// 
+        /// </summary>
+        /// <param name="radians"></param>
+        /// <param name="position"></param>
+        /// <param name="scalar"></param>
+        /// <returns></returns>
         public static Matrix4 CreateRotationZ(float radians)
         {
             

@@ -104,13 +104,19 @@ namespace MathForGames
 
         private void CheckCollision()
         {
-           for(int i = 0; i < _actors.Length; i++)
+            for (int i = 0; i < _actors.Length; i++)
             {
-                for(int j = 0; j < _actors.Length; j++)
-                _actors[i].CheckCollision(_actors[j]);
-                
+                for (int j = 0; j < _actors.Length; j++)
+                {
+                    if (i >= _actors.Length)
+                        break;
+
+                    if (_actors[i].CheckCollision(_actors[j]) && i != j)
+                        _actors[i].OnCollision(_actors[j]);
+                }
             }
         }
+
 
         public virtual void Start()
         {
@@ -123,11 +129,12 @@ namespace MathForGames
             {
                 if (!_actors[i].Started)
                     _actors[i].Start();
-                   CheckCollision();
+                   
               
                 _actors[i].Update(deltaTime);
                 
             }
+            CheckCollision();
         }
 
         public virtual void Draw()
