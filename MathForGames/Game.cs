@@ -116,16 +116,22 @@ namespace MathForGames
             Actor actor = new Actor(0, 0, Color.DARKBLUE, '*', ConsoleColor.DarkBlue);
             actor.Velocity.X = 1;
             
-            Player player = new Player(9, 1, Color.YELLOW, 'A', ConsoleColor.Yellow);
+            Player player = new Player(1, 20, Color.YELLOW, 'A', ConsoleColor.Yellow);
 
             Enemy enemy = new Enemy(2, 1, Color.MAROON, ' ', ConsoleColor.Green);
+            Enemy enemy2 = new Enemy(5, 1, Color.MAROON, ' ', ConsoleColor.Green);
+            Enemy enemy3 = new Enemy(9, 1, Color.MAROON, ' ', ConsoleColor.Green);
+           
 
-            
+
 
             //scene.AddActor(actor);
             scene1.AddActor(player);
 
             scene1.AddActor(enemy);
+            scene1.AddActor(enemy2);
+
+
 
             //enemy.SetTranslate(new Vector2(4, 5));
             enemy.SetScale(3, 3);

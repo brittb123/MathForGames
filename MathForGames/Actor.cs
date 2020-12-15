@@ -190,13 +190,7 @@ namespace MathForGames
             Rotate(angle);
         }
 
-        public float Distance(Vector2 pos1, Vector2 pos2)
-        {
-            float d;
-            Vector2 Dist = pos1 - pos2;
-            d = Dist.GetMagnitude();
-                return d;
-        }
+       
 
         //Checks to see if actor is colliding with the player, another actor, or an object that has a collision
         public bool CheckCollision(Actor other)
@@ -216,6 +210,7 @@ namespace MathForGames
             }
         }
 
+        // Sets Scale for any actor in the used
         public void SetScale(float x, float y)
         {
             _scale = Matrix3.CreateScale(new Vector2(x, y));
