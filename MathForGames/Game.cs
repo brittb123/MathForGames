@@ -139,6 +139,7 @@ namespace MathForGames
             
             player.SetScale(1, 1);
             enemy.Target = player;
+            enemy.AddChild(enemy2);
 
             //player.SetTranslate(new Vector2 (10, 5));
 
@@ -148,13 +149,6 @@ namespace MathForGames
 
 
             SetCurrentScene(startingSceneIndex);
-
-
-
-
-
-
-
 
 
         }
@@ -189,8 +183,12 @@ namespace MathForGames
         //Called when the game ends.
         public void End()
         {
+            
             if (_scenes[_currentScene].Started)
                 _scenes[_currentScene].End();
+
+          
+          
         }
 
 

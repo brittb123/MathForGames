@@ -207,6 +207,10 @@ namespace MathForGames
             if (CheckCollision(other))
             {
                 SetScale(0, 0);
+                Console.WriteLine("You died");
+                Console.ReadKey();
+                Game.SetGameOver(true);
+
             }
         }
 

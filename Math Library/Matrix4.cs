@@ -54,7 +54,7 @@ namespace Math_Library
                 );
         }
 
-
+        // Multiplies two matrices together
         public static Matrix4 operator *(Matrix4 lhs, Matrix4 rhs)
         {
             return new Matrix4
@@ -81,6 +81,7 @@ namespace Math_Library
                 );
         }
 
+        //Multiples a matrix4 and vector4 then returns a vector4
         public static Vector4 operator *(Matrix4 lhs, Vector4 rhs)
         {
             float a = lhs.m11 * rhs.X + lhs.m12 * rhs.Y + lhs.m13 * rhs.Z + lhs.m14 * rhs.W;
